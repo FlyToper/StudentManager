@@ -1,0 +1,168 @@
+﻿.mynav {
+    margin-top:0px;
+    margin-bottom:0px;
+}
+
+.myheader {
+    margin-top:100px;
+    background-color:#99CCFF;
+    color:black;
+    margin-bottom:0px;
+    font-size:large;
+}
+
+.myfooter {
+    text-align:center;
+}
+
+.myerror {
+    color:red;
+}
+
+.myWarnModel {
+    display:none;
+}
+
+.mytable {
+    text-align:center;
+    font-size:medium;
+    border-style:solid;
+    border-width:2px;
+    border-color:#CC99CC;
+    border-radius:6px;
+    width:100%;
+}
+.mytable th {
+    text-align:center;
+}
+
+.mytable2 {
+     text-align:center;
+    font-size:medium;
+    border-style:solid;
+    border-width:2px;
+    border-color:#CC99CC;
+    border-radius:6px;
+    width:100%;
+    margin-right:0px;
+}
+
+.mytable2 th {
+    text-align:center;
+    background-color:#0099CC;
+}
+
+.mytable2 td {
+    /*text-align:left;*/
+    text-align:center;
+    border-color:black;
+    border-bottom:solid;
+    border-left:solid;
+    border-width:1px;
+}
+
+
+.mytr1 {
+    background-color:#99FFCC;
+}
+
+.mytr2 {
+    background-color:#CCFFFF;
+}
+
+.mytr3 {
+    background-color:#CCCCFF;
+}
+
+.mytd {
+    /*color:#FF9999;*/
+    color:#FF6633;
+}
+
+
+.myheaderlink {
+    text-align:right;
+}
+
+.container {
+    border-style:solid;
+    border-color:#99CCFF;
+    /*border-radius:6px;*/
+    border-width:5px;
+    padding-left:0px;
+    padding-right:0px;
+    margin-top:5px;
+    margin-left:0px;
+    margin-right:0px;
+    width:100%;
+}
+
+.content-left {
+    /*background-color:#CCFFFF;*/
+    height:500px;
+    width:20%;
+    float:left;
+    margin-left:0px;
+
+    border-style:solid;
+    border-color:#99CCFF;
+    /*border-radius:6px;*/
+    border-width:5px;
+}
+
+.content-right {
+    /*background-color:blue;*/
+    height:500px;
+    width:80%;
+    float:left;
+    margin-left:0px;
+    margin-right:0px;
+
+    border-style:solid;
+    border-color:#99CCFF;
+    /*border-radius:6px;*/
+    border-width:5px;
+}
+
+.mylabel1 {
+    color:#FFCC99;
+    font-size:large;
+}
+
+.mylabel2 {
+    font-size:large;
+}
+
+.content-left-item {
+    border-style:solid;
+    border-color:black;
+    border-width:1px;
+   margin-left:2px;
+   margin-right:2px;
+   margin-top:2px;
+
+}
+
+.content-left-note button {
+    margin-top:5px;
+    margin-left:5px;
+    width:80%;
+}
+
+.myDivTable {
+    border-style:solid;
+    border-color:black;
+    border-width:1px;
+    width:100%;
+    height:100px;
+}
+
+.myDivTable span {
+    border-bottom-style:solid;
+    border-left-style:solid;
+    border-color:blue;
+    border-width:1px;
+}
+
+
+

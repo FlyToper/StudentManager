@@ -1,0 +1,55 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="~/MyContent/images/LOGO2.jpg" rel="shortcut icon" />
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+
+
+    <title>登录</title>
+
+    <link href="~/MyContent/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/MyContent/css/login.css" rel="stylesheet" />
+</head>
+<body class="myLoginBG3">
+    <!-------------------------登录表单开始-------------------------------->
+    <div class="">
+        <div class="page-container">
+            <h1>用户登录</h1>
+            <form id="form1" method="post" action="/Home/CheckLogin">
+                <span class="glyphicon glyphicon-user myLoginHeadPic" aria-hidden="true"></span>&nbsp; <input type="text" name="Username" class="username" placeholder="Username" id="username">
+                <span class="glyphicon glyphicon-lock myLoginHeadPic" aria-hidden="true"></span>&nbsp; <input type="password" name="Password" class="password" placeholder="Password" id="password">
+
+                <!----------------------选择用户类型开始------------------------>
+                <select class="myLoginSelect" id="roleSelect" name="role">
+                    <option value="0" selected="selected">-请选择-</option>
+                    <option value="1">访客</option>
+                    <option value="2">学生</option>
+                    <option value="3">教师</option>
+                    <option value="4">管理员</option>
+                </select>
+                <!----------------------选择用户类型结束------------------------>
+                <div>
+                    <button type="button" id="btnLogin" class="myLoginButton">提交 </button>
+                </div>
+
+                <div class="myLoginLink">@Html.ActionLink("忘了密码？", "UpdatePwd", "User") <span class="myLoginLabel"> | </span> @Html.ActionLink("还没账号？", "Register", "User") <span class="myLoginLabel"> | </span> <span class="myLoginSpanBtn" id="spanCancel">取消</span> </div>
+                <div class="warming" id="msg">
+                </div>
+            </form>
+        </div>
+        
+    </div>
+    <!--------------------- 登录表单结束-------------------------------->
+    <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+    <script src="~/MyContent/javascript/jquery-2.1.4.min.js"></script>
+    <script src="~/MyContent/javascript/bootstrap.min.js"></script>
+    <script src="~/MyContent/javascript/loginJavaScript.js"></script>
+</body>
+</html>

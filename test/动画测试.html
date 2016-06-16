@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>动画测试</title>
+    <script src="../MyContent/javascript/jquery-2.1.4.min.js"></script>
+</head>
+<body>
+
+    <img width="100px;" height="100px;" id="myImg" src="../MyContent/images/LOGO2.png" />
+
+    <script type="text/javascript">
+
+        $(function () {
+            $("#myImg").hover(function () {
+                $("#myImg").animate({ width: "500px", height: "500px" }, 500);
+            });
+
+            $("#myImg").mouseout(function () {
+                $(this).animate({ width: "100px", height: "100px" }, 500);
+              
+            });
+        });
+        //$("#myImg").animate({ width: "500px", height: "500px" }, 1500, function () {
+        //    $(this).fadeOut("slow");
+        //});
+    </script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+﻿body {
+}
+
+
+.myBG {
+    background-image:url(/MyContent/images/header2.jpg);
+}
+
+ul {list-style: none;}
+
+.myUL {
+    padding-left:0px;
+    margin-left:0px;
+}
+
+    .myUL a {
+        text-decoration:none;
+    }
+     .myUL a:hover {
+        text-decoration:none;
+    }
+
+.myLeftMenu {
+    float:right;
+    margin-right:8px;
+}
+
+#RegisterUserInfoTable th,#RegisterUserInfoTable td {
+    text-align:center;
+    font-size:large;
+}
+
+
+/*main_content_left_content a:hover {
+
+}*/
+
+.myPage {
+    text-align:center;
+    font-size:x-large;
+    color:#999933;
+    background-color:#CCCCFF;
+}
+
+
+.myShowPage {
+    margin-left:15%;
+}
+
+    .myShowPage a {
+        color:white;
+    }
+
+        .myShowPage a:hover {
+            color:yellow;
+            background-color:black;
+        }
+
+.currentPage {
+    color:green;
+    /*background-color:black;*/
+}
+
+/*【管理员的小列表】*/
+.myLeftLi {
+    margin:3px;
+    margin-right:10px;
+    height:30px;
+    padding-top:5px;
+    background-color:#CCCCCC;
+
+    border-style:solid;
+    border-width:1px;
+    border-color:yellow;
+    border-radius:5px;
+}
+
+
+    .myLeftLi a {
+        text-decoration:none;
+    }
+
+    .myLeftLi a {
+         text-decoration:none;
+    }
+
+        .myLeftLi:hover {
+            background-color:#FFFF99;
+        }

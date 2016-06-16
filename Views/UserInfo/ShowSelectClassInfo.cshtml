@@ -1,0 +1,194 @@
+﻿@{
+    Layout = null;
+    int i = 0;
+}
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="~/MyContent/images/LOGO2.jpg" rel="shortcut icon" />
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>学生网上选课</title>
+
+    <link href="~/MyContent/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/MyContent/css/UserInfoCss.css" rel="stylesheet" />
+
+</head>
+<body>
+
+    <div class="headerLogo">
+        
+        <img class="Logo" src="~/MyContent/images/header6.jpg" />
+    </div>
+    <div class="headerLabel">
+        <span><span class="glyphicon glyphicon-user " aria-hidden="true"></span></span> <span class="myHeaderSpanLabel">@ViewBag.Stu.StuName</span> <span class="myHeaderSpanLabel">，您好！</span> <span><span class="myHeaderSpanLabel">专业：</span><span class="myHeaderSpanLabel2">@ViewBag.Stu.Major</span></span>&nbsp;&nbsp;<span><span class="myHeaderSpanLabel">班级：</span><span class="myHeaderSpanLabel2">@ViewBag.Stu.ClassName</span></span>&nbsp;&nbsp;<span> <span class="myHeaderSpanLabel">学号：</span> <span class="myHeaderSpanLabel2">@ViewBag.Stu.StuNum</span> </span>
+    </div>
+    <!--------------------------------导航条开始----------------------------------------------------->
+
+    <nav class="navbar navbar-default navbar-inverse mynav">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @*<a class="navbar-brand" href="#">Brand</a>*@
+
+                <img class="navbar-brand" src="~/MyContent/images/LOGO2.png" />
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav" id="mynavUl">
+                    <li id="mynavL1">@Html.ActionLink("个人信息", "Student", "UserInfo")</li>
+                    <li id="mynavL2">@Html.ActionLink("成绩信息查询","ScoreInfo","UserInfo") </li>
+                    <li id="munavL3" class="active"><a href="javascript:void(0);">任意选修课网上选课 <span class="sr-only">(current)</span></a></li>
+                    @*<li><button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+    系统帮助和说明
+</button></li>*@
+                    @*<li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">Separated link</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">One more separated link</a></li>
+                        </ul>
+                    </li>*@
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/Home/Exist"><span class="glyphicon glyphicon-log-in mySuccess" aria-hidden="true"></span>&nbsp; 重新登录</a></li>
+                    <li><a href="/Home/Exist"><span class="glyphicon glyphicon-log-out myError" aria-hidden="true"></span>&nbsp; 退出</a></li>
+
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+    <!--------------------------------导航条结束----------------------------------------------------->
+    <!--------------------------主内容开始-------------------------------------------------------->
+    <div class="score_main_content">
+        <div class="main_content_left">
+            <div class="main_content_left_0"> <span class="glyphicon glyphicon-wrench myNewSpanColor" aria-hidden="true"></span>&nbsp;  相关操作 </div>
+
+            <div class="main_content_left_content">
+                <div class="main_content_left_1" id="mynavLeft1"> &nbsp; <span class="glyphicon glyphicon-list-alt myNewSpanColor" aria-hidden="true"></span>&nbsp; @Html.ActionLink("全校公共选修课", "ShowSelectClassInfo", "UserInfo") </div>
+                @*<div class="main_content_left_1" id="mynavLeft2"> &nbsp; <a href="javascript:void(0);" onclick="UpdatePwd()">修改密码</a> </div>*@
+            </div>
+        </div>
+
+        <!---------------------------左右两边分割线-------------------------------------------->
+        <div class="main_content_right">
+            <div>
+                <div class="main_content_right_0">&nbsp;&nbsp;&nbsp;&nbsp;当前位置：学生 -----> 学生网上选课 </div>
+            </div>
+
+            <div class="main_content_right_content">
+                <div class="main_content_right_content_title">学生网上选课</div>
+
+                <div class="score_main_content_right_content_1">
+                    <div class="mydiv1" id="mydiv1">
+
+                        @*<hr />*@
+
+                        <table id="t1">
+                            <thead >【<text class="mythead"> 学生已选课信息</text>】</thead>
+                                <tr class="myTopTr"><th>课程号</th><th>课程名称</th><th>学分</th><th>课程类型</th><th>起始周</th><th>上课时间</th><th>上课地点</th><th>教师姓名</th><th>预订教程</th><th>课程性质</th><th>志愿</th><th>退选</th></tr>
+                                @foreach (var selectClassInfo in ViewBag.SelectClassInfo)
+                            {
+                                if (i == 0)
+                                {
+                                    <tr class="myOtherTr"><td>@selectClassInfo.CourseNum</td><td>@selectClassInfo.CourseName</td><td>@selectClassInfo.Credit</td><td>@selectClassInfo.CourseType</td><td>@selectClassInfo.LearnWeeks</td><td>@selectClassInfo.ClassTime</td> <td>@selectClassInfo.ClassRoom</td><td>@selectClassInfo.TeacherName</td><td>无</td>&nbsp; <td></td><td>1</td><td><input type="button" value="退选" onclick="delLink('@selectClassInfo.CourseNum')" /> </td></tr>
+                                    i = 1;
+
+                                }
+                                else
+                                {
+                                    <tr class="myOtherTr myTrBackgroudcolor"><td>@selectClassInfo.CourseNum</td><td>@selectClassInfo.CourseName</td><td>@selectClassInfo.Credit</td><td>@selectClassInfo.CourseType</td><td>@selectClassInfo.LearnWeeks</td><td>@selectClassInfo.ClassTime</td> <td>@selectClassInfo.ClassRoom</td><td>@selectClassInfo.TeacherName</td><td>无</td>&nbsp; <td></td><td>1</td><td><input type="button" value="退选" onclick="delLink('@selectClassInfo.CourseNum')" /></td></tr>
+                                    i = 0;
+
+                                }
+                            }
+                                
+                                @for (int k = 0; k < 0; k++)
+                            {
+                                    <tr class="myOtherTr "><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+                            }
+                            </table>
+
+                     <hr />
+
+                        <table id="t2">
+                            <thead >【<text class="mythead">课程信息列表</text> 】</thead>
+                                @*<tr class="myTopTr"><th>课程号</th><th>课程名称</th><th>学分</th><th>课程类型</th><th>起始周</th><th>上课时间</th><th>上课地点</th><th>教师姓名</th><th>预订教程</th><th>课程性质</th><th>志愿</th><th>退选</th></tr>*@
+                            <tr class="myTopTr"><th>课程名称</th><th>起始周</th><th>上课时间</th><th>课程类型</th><th>上课地点</th><th>学分</th><th>容量</th><th>已选</th><th>学科类别</th><th>教师姓名</th><th>第一志愿</th><th>课程号</th><th>考核方式</th><th>备注</th></tr>
+                                @foreach (var courseInfo in ViewBag.CourseInfo)
+{
+    if (i == 0)
+    {
+        <tr class="myOtherTr  myTrBackgroudcolor"><td>@courseInfo.CourseName</td><td>@courseInfo.LearnWeeks</td><td>@courseInfo.ClassTime</td><td>@courseInfo.CourseType</td><td>@courseInfo.ClassRoom</td><td>@courseInfo.Credit</td><td>@courseInfo.Count</td><td>@courseInfo.SelectCount</td><td>@courseInfo.CourseType</td><td>@courseInfo.TeacherName</td><td><input type="checkbox" id="@courseInfo.CourseNum" tNum ="@courseInfo.TeacherNum" /> </td><td>@courseInfo.CourseNum</td><td>@courseInfo.CheckWay</td> <td>@courseInfo.Remark</td></tr>
+        i = 1;
+
+    }
+    else
+    {
+                                   <tr class="myOtherTr  "><td>@courseInfo.CourseName</td><td>@courseInfo.LearnWeeks</td><td>@courseInfo.ClassTime</td><td>@courseInfo.CourseType</td><td>@courseInfo.ClassRoom</td><td>@courseInfo.Credit</td><td>@courseInfo.Count</td><td>@courseInfo.SelectCount</td><td>@courseInfo.CourseType</td><td>@courseInfo.TeacherName</td><td><input type="checkbox"  id="@courseInfo.CourseNum" tNum="@courseInfo.TeacherNum" /> </td><td>@courseInfo.CourseNum</td><td>@courseInfo.CheckWay</td> <td>@courseInfo.Remark</td></tr>
+                                    i = 0;
+                                    @*for (int t = 0; t < 0; t++) { 
+                                        <tr class="myOtherTr  "><td>@courseInfo.CourseName</td><td>@courseInfo.LearnWeeks</td><td>@courseInfo.ClassTime</td><td>@courseInfo.CourseType</td><td>@courseInfo.ClassRoom</td><td>@courseInfo.Credit</td><td>@courseInfo.Count</td><td>@courseInfo.SelectCount</td><td>@courseInfo.CourseType</td><td>@courseInfo.TeacherName</td><td><input type="checkbox"  id="@courseInfo.CourseNum" tNum="@courseInfo.TeacherNum" /> </td><td>@courseInfo.CourseNum</td><td>@courseInfo.CheckWay</td> <td>@courseInfo.Remark</td></tr>
+                                    }*@
+
+                                }
+                            }
+                    </table>
+                        <br />
+                        <div class="footerLink"> <input type="button" value="选定" onclick="btnSelectClass()" /> </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+        </div>
+    </div>
+
+    <!--------------------------主内容结束-------------------------------------------------------->
+    <hr />
+    <div id="Timer"><!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary btn-lg myHide" data-toggle="modal" data-target="#myModal">
+            Launch demo modal
+        </button>
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">系统帮助和说明</h4>
+                    </div>
+                    <div class="modal-body">
+                        ...
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+    </div>
+    </div>
+    <div class="footerLink"><p>友情链接：<a href="http://glyphicons.com/"> Glyphicons </a> | <a  href="javascript:void(0);"  onclick="myHelpLink()"> <span class="glyphicon glyphicon-question-sign " aria-hidden="true"></span> 系统帮助和说明</a> </p></div>
+    <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+    <script src="~/MyContent/javascript/jquery-2.1.4.min.js"></script>
+    <script src="~/MyContent/javascript/bootstrap.min.js"></script>
+    <script src="~/MyContent/javascript/stuJS.js"></script>
+</body>
+</html>
+

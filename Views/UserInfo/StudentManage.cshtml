@@ -1,0 +1,236 @@
+﻿@{
+    Layout = null;
+    int i1 = 0;
+    int i2 = 0;
+    int k = 1;
+}
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="~/MyContent/images/LOGO2.jpg" rel="shortcut icon" />
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>学生管理</title>
+
+    <link href="~/MyContent/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/MyContent/css/UserInfoCss.css" rel="stylesheet" />
+    <link href="~/MyContent/css/myInfo.css" rel="stylesheet" />
+</head>
+<body>
+
+    <div class="headerLogo">
+        <img class="Logo" src="~/MyContent/images/header6.jpg" />
+    </div>
+    <div class="headerLabel">
+        <span><span class="glyphicon glyphicon-user " aria-hidden="true"></span></span> <span class="myHeaderSpanLabel">@ViewBag.Teacher.TeacherName</span> <span class="myHeaderSpanLabel">，您好！</span> <span><span class="myHeaderSpanLabel">专业：</span><span class="myHeaderSpanLabel2">@ViewBag.Teacher.Major</span></span>&nbsp;&nbsp;<span> <span class="myHeaderSpanLabel">学历：</span> <span class="myHeaderSpanLabel2">@ViewBag.Teacher.Education</span> </span>&nbsp;&nbsp;<span><span class="myHeaderSpanLabel">职称：</span><span class="myHeaderSpanLabel2">@ViewBag.Teacher.Position</span></span>&nbsp;&nbsp;<span> <span class="myHeaderSpanLabel">教职工编号：</span> <span class="myHeaderSpanLabel2">@ViewBag.Teacher.TeacherNum</span> </span>
+    </div>
+    <!--------------------------------导航条开始----------------------------------------------------->
+
+    <nav class="navbar navbar-default navbar-inverse mynav">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @*<a class="navbar-brand" href="#">Brand</a>*@
+
+                <img class="navbar-brand" src="~/MyContent/images/LOGO2.png" />
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav" id="mynavUl">
+                    <li  id="mynavL1">@Html.ActionLink("个人信息","Teacher","UserInfo") </li>
+                    <li id="mynavL2">@Html.ActionLink("课程管理", "UpdateCourseInfo", "UserInfo")</li>
+                    <li class="active" id="munavL3"><a href="javascript:void(0);">学生管理 <span class="sr-only">(current)</span></a> </li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/Home/Exist"><span class="glyphicon glyphicon-log-in mySuccess" aria-hidden="true"></span>&nbsp; 重新登录</a></li>
+                    <li><a href="/Home/Exist"><span class="glyphicon glyphicon-log-out myError" aria-hidden="true"></span>&nbsp; 退出</a></li>
+
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+    <!--------------------------------导航条结束----------------------------------------------------->
+    <!--------------------------主内容开始-------------------------------------------------------->
+    <div class="main_content UerInfo_main" id="teacher_main_content">
+        <div class="main_content_left">
+            <div class="main_content_left_0"> <span class="glyphicon glyphicon-wrench myNewSpanColor" aria-hidden="true"></span>&nbsp;  相关操作 </div>
+
+            <div class="main_content_left_content">
+                <div class="main_content_left_1" id="mynavLeft1"> &nbsp; <span class="glyphicon glyphicon-leaf myNewSpanColor" aria-hidden="true"></span>&nbsp;@Html.ActionLink("学生管理", "StudentManage", "UserInfo") </div>
+                @*<div class="main_content_left_1" id="mynavLeft2"> &nbsp; <a href="javascript:void(0);" onclick="UpdatePwd()">修改密码</a> </div>*@
+            </div>
+        </div>
+        <!---------------------------左右两边分割线-------------------------------------------->
+        <div class="main_content_right">
+            <div>
+                <div class="main_content_right_0">&nbsp;&nbsp;&nbsp;&nbsp;当前位置：教师 ----->课程开班信息 </div>
+            </div>
+
+            <div class="main_content_right_content">
+                <div class="main_content_right_content_title">课程开班信息</div>
+
+                <div class="main_content_right_content_1">
+                    <div class="mydiv2 TeacherUserInfo" id="mydiv1">
+
+                        <!--------------内容信息框开始----------------------->
+
+                       <!----------------------教师开班课程信息表（开始）------------------------------------>
+
+                        <div id="MyCourseInfoTable">
+                            <!----最新发布的课程信息---->
+                            <table class="myCourseInfoTable myTableFont_Large" id="t1">
+                                <thead>【<text class="mythead1"> 最新发布的课程开班情况</text>】</thead>
+                                <tr class="myTopTr"><th>序号</th> <th>课程号</th><th>课程名称</th><th>上课时间</th><th>上课地点</th><th>预定人数</th><th>已选人数</th> <th>提交时间</th><th>相关操作</th> </tr>
+                                @foreach (var CourseInfo in ViewBag.CourseList)
+                                {
+                                    if (CourseInfo.IsEnd == 1)//IsEnd = 1标识课程还没结束
+                                    {
+                                        if (i1 == 0)
+                                        {
+                                           <tr class="myOtherTr" id="tr_@k"><td>@k</td><td>@CourseInfo.CourseNum</td> <td>@CourseInfo.CourseName</td><td>@CourseInfo.FullClassTime</td><td>@CourseInfo.ClassRoom</td><td>@CourseInfo.Count</td><td>@CourseInfo.SelectCount</td> <td>@CourseInfo.SubDate</td>  <td> <a href="javascript:void(0);" onclick="GetNewClassInfo('@CourseInfo.CourseNum')">查看学生信息</a>  </td> </tr>
+                                            i1 = 1;
+                                            k++;
+                                        }
+                                        else
+                                        {
+                                            <tr class="myOtherTr myTrBackgroudcolor" id="tr_@k"><td>@k</td><td>@CourseInfo.CourseNum</td> <td>@CourseInfo.CourseName</td><td>@CourseInfo.FullClassTime</td><td>@CourseInfo.ClassRoom</td><td>@CourseInfo.Count</td><td>@CourseInfo.SelectCount</td> <td>@CourseInfo.SubDate</td> <td> <a href="javascript:void(0);" onclick="GetNewClassInfo('@CourseInfo.CourseNum')">查看学生信息</a> </td> </tr>
+                                            i1 = 0;
+                                            k++;
+                                        }
+                                    } 
+                                }
+                                @if (k == 1) 
+                                {
+                                    <tr class="myOtherTr"><td colspan="9" align="left">暂无开班信息</td></tr>
+                                }
+                            </table>
+                            <hr />
+                            <!------历史发布课程信息------>
+                            <table class="myCourseInfoTable myTableFont_Large" id="t2">
+                                <thead>【<text class="mythead1"> 历年发布的课程开班情况</text>】</thead>
+                                <tr class="myTopTr"><th>序号</th> <th>课程号</th><th>课程名称</th><th>上课时间</th><th>上课地点</th><th>预定人数</th><th>已选人数</th>  <th>提交时间</th> <th>相关操作</th> </tr>
+                                @{k = 1;}
+                                @foreach (var CourseInfo in ViewBag.CourseList)
+                                {
+
+                                    if (CourseInfo.IsEnd == 0)//IsEnd = 1标识课程结束
+                                    {
+                                        if (i2 == 0)
+                                        {
+                                            <tr class="myOtherTr" id="tr_@k"><td>@k</td><td>@CourseInfo.CourseNum</td> <td>@CourseInfo.CourseName</td><td>@CourseInfo.FullClassTime</td><td>@CourseInfo.ClassRoom</td><td>@CourseInfo.Count</td><td>@CourseInfo.SelectCount</td>  <td>@CourseInfo.SubDate</td> <td> <a href="javascript:void(0);" onclick="GetOldClassInfo('@CourseInfo.CourseNum')">查看学生信息</a>  </td> </tr>
+                                            i2 = 1;
+                                            k++;
+                                        }
+                                        else
+                                        {
+                                            <tr class="myOtherTr myTrBackgroudcolor" id="tr_@k"><td>@k</td><td>@CourseInfo.CourseNum</td> <td>@CourseInfo.CourseName</td><td>@CourseInfo.FullClassTime</td><td>@CourseInfo.ClassRoom</td><td>@CourseInfo.Count</td><td>@CourseInfo.SelectCount</td> <td>@CourseInfo.SubDate</td> <td><a href="javascript:void(0);" onclick="GetOldClassInfo('@CourseInfo.CourseNum')">查看学生信息</a></td> </tr>
+                                            i2 = 0;
+                                            k++;
+                                        }
+                                    }
+                                }
+                                @if (k == 1)
+                                {
+                                    <tr class="myOtherTr"><td colspan="9" align="left">暂无历史开班信息</td></tr>
+                                }
+                            </table>
+                        
+                        </div>
+                      
+                        <!----------------------教师开班课程信息表（结束）------------------------------------>
+                        <!----------------------教师开班课程信息表（结束）------------------------------------>
+                        @*<br />*@
+
+                        <!-----------③查看学生信息------------->
+                        <div id="MyClassInfo" class="myHide">
+                            <hr class="myhr"/>
+                            <span class="myBackSpace">
+                                <a href="javascript:void(0);" onclick="StudentMangage_BackBtnClick()"> <span class="myRebackLabel"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> 返回</span></a>
+                            </span>
+                            <span class="EditSpace">
+                                <a href="javascript:void(0);" onclick="StudentMangage_BackBtnClick()"> <span class="myEditLabel"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> 成绩编辑</span></a> 
+                            </span>
+                            <table class="MyTable myTableFont_Large" id="t3">
+                                <tr class="myTopTr"><th>序号</th><th>学号</th><th>姓名</th><th>性别</th> <th>专业</th><th>联系电话</th><th>邮箱</th> <th>相关操作</th> </tr>
+                            </table>
+
+                           
+                        </div>
+
+                        <!----------④学生成绩信息展示---------->
+                        <div id="myEditStuScore" class="myHide">
+                            <hr class="myhr" />
+                            <span class="myBackSpace">
+                                <a href="javascript:void(0);" onclick="StudentMangage_BackBtnClick2()"> <span class="myRebackLabel"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> 返回</span></a>
+                            </span>
+
+                            <table class="MyTable myTableFont_Large" id="t4">
+                                <tr class="myTopTr"><th>序号</th><th>学号</th><th>姓名</th><th>平时成绩</th> <th>期中成绩</th><th>实验成绩</th><th>期末成绩</th><th>总评</th> <th>相关操作</th> </tr>
+                            </table>
+                        </div>
+
+                        <!----------------------教师开班课程信息表（结束）------------------------------------>
+
+                        
+
+                        <!--------------内容信息框结束----------------------->
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    
+    <!--------------------------主内容结束-------------------------------------------------------->
+
+    <hr />
+
+    <!-----------------------系统帮助和说明模板框（开始）---------------------------------------->
+    <div id="Timer">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary btn-lg myHide" data-toggle="modal" data-target="#myModal">
+            Launch demo modal
+        </button>
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">系统帮助和说明</h4>
+                    </div>
+                    <div class="modal-body">
+                        ...
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-----------------------系统帮助和说明模板框（结束）---------------------------------------->
+
+    <div class="footerLink"><p>友情链接：<a href="http://glyphicons.com/"> Glyphicons </a> | <a href="javascript:void(0);" onclick="myHelpLink()"> <span class="glyphicon glyphicon-question-sign " aria-hidden="true"></span> 系统帮助和说明</a> </p></div>
+    <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+    <script src="~/MyContent/javascript/jquery-2.1.4.min.js"></script>
+    <script src="~/MyContent/javascript/bootstrap.min.js"></script>
+    <script src="~/MyContent/javascript/teacherJS.js"></script>
+    <script src="~/MyContent/javascript/myInfoJS.js"></script>
+    <script src="~/MyContent/javascript/studentManagerJS.js"></script>
+</body>
+</html>
+

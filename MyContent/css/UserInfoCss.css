@@ -1,0 +1,632 @@
+﻿.footerLink {
+    /*margin-top:500px;*/
+    text-align:center;
+    font-size:large;
+}
+
+.mynav {
+    margin-top:0px;
+    margin-bottom:0px;
+}
+
+.headerLabel {
+   /*margin-top:100px;*/
+   /*margin-bottom:0px;*/
+   /*background-color:#7799CC;*/
+   /*background-color:#6699CC;*/
+   background-color:#99CCFF;
+   padding-left:20px;
+   border-top-style:solid;
+   border-top-width:2px;
+   border-top-color:#CC99FF;
+   border-bottom-style:solid;
+   border-bottom-width:2px;
+   border-bottom-color:#CC99FF;
+   /*border-top-color:rgba(45,45,45,.15);*/
+}
+
+    .headerLabel p {
+        margin-top:7px;
+    }
+
+
+.headerLogo {
+
+}
+
+    .headerLogo .Logo {
+       width:100%;
+       height:250px;
+    }
+
+
+.myHeaderSpanLabel {
+    font-size:large;
+    color:white;
+}
+
+.myHeaderSpanLabel2 {
+     font-size:large;
+}
+
+.myError {
+    color:red;
+    /*font-size:large;*/
+}
+
+.mySuccess {
+    color:green;
+    /*font-size:large;*/
+}
+
+
+.main_content {
+    border-radius:6px;
+    margin-top: 1px;
+    width: 100%;
+    height: 600px;
+    border-style:solid;
+    border-width: 15px;
+    /*border-color: #CCCCFF;*/
+    /*border-color:#6699CC;*/
+    border-color:#99CCFF;
+
+    /*padding-bottom:200px;*/
+}
+
+.main_content_left {
+    float:left;
+    width:20%;
+    height:100%;
+    background-color:#CCFFCC;
+    /*background-color:#99CCFF;*/
+
+}
+
+.main_content_right {
+    float:right;
+    width:80%;
+    height:100%;
+    /*background-color:blue;*/
+
+    border-left-style:solid;
+    border-left-width:15px;
+    /*border-left-color:#CCCCFF;*/
+    border-color:#99CCFF;
+
+}
+
+
+.main_content_left_0 {
+    margin-left:3px;
+    margin-top:3px;
+    margin-right:3px;
+
+    /*background-color:#0099CC;*/
+    /*background-color:#99CCFF;*/
+    background-color:#00CCFF;
+
+    border-radius:6px;
+    text-align:center;
+
+    border-style:solid;
+    border-width:2px;
+    /*border-color:#CC99CC;*/
+    border-color:#00CCFF;
+}
+
+
+.main_content_left_content {
+    margin:3px;
+    border-style:solid;
+    border-width:2px;
+    border-color:#FFCCFF;
+    /*height:94%;*/
+    /*margin-bottom:50px;*/
+    padding-bottom:10px;
+
+    background-color:white;
+}
+
+.main_content_left_1 {
+    padding-top:3px;
+    margin-left:3px;
+    margin-top:3px;
+    margin-right:3px;
+
+    font-size:large;
+
+    border-style:solid;
+    border-width:1px;
+    border-color:#CC99CC;
+
+    background-color:#CCCCFF;
+
+    
+}
+
+/*                   左右两边的分割线                          */
+
+.main_content_right_0 {
+     /*margin-left:3px;*/
+    margin-top:3px;
+    /*margin-right:3px;*/
+
+    /*background-color:#99CCFF;*/
+    background-color:#FFCCCC;
+    /*border-radius:6px;*/
+    border-radius:6px;
+    border-style:solid;
+    border-width:2px;
+    /*border-color:#CC99CC;*/
+    border-color:#00CCFF;
+}
+
+.main_content_right_content {
+    margin:3px;
+
+     border-style:solid;
+    border-width:2px;
+    border-color:#FFCCFF;
+    /*height:94%;*/
+
+    margin-bottom:50px;
+}
+
+.main_content_right_content_title {
+    text-align:center;
+    background-color:#CCFFCC;
+}
+
+.myrow {
+    width:100%;
+    background-color:#6699CC;
+}
+
+.div_td_1 {
+    /*border-style:solid;*/
+    border-bottom-style:solid;
+    border-right-style:solid;
+    border-color:#FFCCFF;
+    border-width:2px;
+    width:33%;
+    float:left;
+}
+
+
+.main_content_right_content_1 table {
+    /*border-style:solid;
+    border-width:1px;*/
+    width:100%;
+}
+
+.main_content_right_content_1 th {
+    text-align:right;
+}
+
+.main_content_right_content_1 td, .main_content_right_content_1 th {
+    border-style:solid;
+    border-width:1px;
+}
+
+
+/*.mydiv1,.main_content_right_content_1 {
+    width:100%;
+}*/
+
+.main_content_right_content_1 tr {
+    width:100%;
+    margin-right:0px;
+    /*background-color:#CCFFFF;*/
+}
+
+
+/*-------------------------修改密码的部分样式(开始)--------------------------------------------------*/
+/*圆边框*/
+.myRoundBorder {
+    border-style:solid;
+    border-width:2px;
+    border-color:#3399CC;
+
+    border-radius:6px;
+
+    margin:10px;
+    /*margin-left:10px;
+    margin-right:10px;*/
+    height:480px;
+}
+
+
+.myMargin {
+    margin-top:50px;
+}
+
+.myTr {
+    text-align:center;
+    margin-top:20px;
+}
+
+.myLabel {
+    font-size:x-large;
+    /*color:#0099CC;*/
+    color:#99CCFF;
+}
+
+.myBtn {
+   padding-right:200px;
+}
+
+.myBtn2 {
+    height:30px;
+    width:120px;
+    background-color:#99CCFF;
+    border-radius:6px;
+}
+
+.mySuccess {
+    font-size:large;
+    color:green;
+}
+
+.myError {
+    font-size:large;
+    color:red;
+}
+
+
+.myInput {
+    width: 270px;
+    height: 42px;
+    margin-top: 25px;
+    padding: 0 15px;
+    background: #2d2d2d; /* browsers that don't support rgba */
+    /*background: rgba(45,45,45,.15);*/
+    background-color:white;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    border: 1px solid #3d3d3d; /* browsers that don't support rgba */
+    border: 1px solid rgba(255,255,255,.15);
+    -moz-box-shadow: 0 2px 3px 0 rgba(0,0,0,.1) inset;
+    -webkit-box-shadow: 0 2px 3px 0 rgba(0,0,0,.1) inset;
+    box-shadow: 0 2px 3px 0 rgba(0,0,0,.1) inset;
+    font-family: 'PT Sans', Helvetica, Arial, sans-serif;
+    font-size: 20px;
+    /*color: #fff;*/
+    text-shadow: 0 1px 2px rgba(0,0,0,.1);
+    -o-transition: all .2s;
+    -moz-transition: all .2s;
+    -webkit-transition: all .2s;
+    -ms-transition: all .2s;
+}
+
+
+.myGrayBackground {
+    /*background-color:rgba(0,0,0,.1);*/
+    /*background-color:#CCCCCC;*/
+    /*background-color:rgba(0,0,0,.1);*/
+    background-color:rgba(0,0,0,0.4);
+}
+
+.myBlackColor {
+    color:black;
+}
+
+/*-------------------------修改密码的部分样式(结束)--------------------------------------------------*/
+
+
+
+/*-------------------------学生成绩的部分样式(开始)--------------------------------------------------*/
+.score_main_content_right_content_1 table {
+    width:100%;
+    text-align:center;
+
+ 
+}
+
+.myTopTr {
+    /*background-color:#99CCFF;*/
+    background-color:#CCCCFF;
+}
+
+.myOtherTr {
+    border-top:solid;
+    border-bottom:solid;
+    border-width:1px;
+    border-color:#99CCFF;
+    /*background-color:yellow;*/
+}
+
+.myTrBackgroudcolor {
+    background-color:rgba(0,0,0,.1);
+}
+
+.score_main_content {
+    border-radius:6px;
+    margin-top: 1px;
+    width: 100%;
+    height: 600px;
+    border-style:solid;
+    border-width: 15px;
+    /*border-color: #CCCCFF;*/
+    border-color:#6699CC;
+
+
+    /*padding-bottom:10px;*/
+}
+
+.mytr2 {
+    background-color:#CCFFFF;
+   
+}
+
+.mytr3 {
+     background-color:#FFFFCC;
+}
+
+.mytr2-1 {
+     height:30px;
+}
+
+/*.score_main_content  .main_content_left{
+    margin:3px;
+    border-style:solid;
+    border-width:2px;
+    border-color:#FFCCFF;
+    height:94%;
+
+    margin-bottom:10px;
+    background-color:white;
+}*/
+
+.myTopTitle {
+    text-align:left;
+    font-size:large;
+    color:black;
+}
+
+.myLeftTd {
+    text-align:left;
+}
+
+
+
+#StuInfoTable,#StuEditTable {
+    font-size:large;
+    
+}
+
+     .mytr3 {
+        text-align:center;
+
+    }
+
+/*-------------------------学生成绩的部分样式(结束)--------------------------------------------------*/
+
+
+/*-------------------------学生选课部分样式(开始)--------------------------------------------------*/
+
+#t1, #t2,.MyTable {
+    text-align:center;
+    width:100%;
+}
+
+    #t1 th, #t2 th, .MyTable th {
+        text-align:center;
+    }
+
+   .mythead {
+        color:#0099CC;
+    }
+
+
+.myDelLink {
+    border-style:solid;
+    border-color:blue;
+    border-width:1px;
+    border-color:#99CCFF;
+}
+
+
+.myHide {
+    display:none;
+}
+
+.myNewSpanColor {
+    color:#990066;
+}
+
+/*-------------------------学生选课部分样式(结束)--------------------------------------------------*/
+
+
+/*------------------------------教师部分样式（开始）------------------------------------------*/
+.myLoginSelect {
+    color:black;
+    /*color:white;*/
+    font-size:large;
+    /*float:left;*/
+    margin-top:10px;
+    /*margin-left:30px;*/
+    height:30px;
+    /*width:100px;*/
+    text-align:center;
+    border-radius:6px;
+    /*background:#2d2d2d;*/
+    /*background: rgba(66,99,CC,0.5);*/
+    border-style:solid;
+    border-color:#6699CC;
+}
+
+.myLargeFont {
+    font-size:large;
+}
+
+.myInput2 {
+    width: 150px;
+    height: 42px;
+    margin-top: 15px;
+    padding: 0 15px;
+    background: #2d2d2d; /* browsers that don't support rgba */
+    /*background: rgba(45,45,45,.15);*/
+    background-color:white;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    border: 1px solid #3d3d3d; /* browsers that don't support rgba */
+    border: 1px solid rgba(255,255,255,.15);
+    -moz-box-shadow: 0 2px 3px 0 rgba(0,0,0,.1) inset;
+    -webkit-box-shadow: 0 2px 3px 0 rgba(0,0,0,.1) inset;
+    box-shadow: 0 2px 3px 0 rgba(0,0,0,.1) inset;
+    font-family: 'PT Sans', Helvetica, Arial, sans-serif;
+    font-size: 20px;
+    /*color: #fff;*/
+    text-shadow: 0 1px 2px rgba(0,0,0,.1);
+    -o-transition: all .2s;
+    -moz-transition: all .2s;
+    -webkit-transition: all .2s;
+    -ms-transition: all .2s;
+}
+
+.myInput3 {
+    width:80px;
+}
+
+.myLabel2 {
+    font-size:x-large;
+    color:#FFCC99;
+}
+
+.myCourseSubBtn1 {
+    width:200px;
+    height:50px;
+
+    border-style:solid;
+    border-width:1px;
+    border-color:#99CCFF;
+    border-radius:6px;
+   background-color:#FFCC99;
+}
+
+
+.myCourseSubBtn2 {
+    background-color:#99FFFF;
+}
+
+#myfieldset {
+    border-style:solid;
+    /*background-color:blue;*/
+}
+
+.mytextarea {
+    resize:none;
+    border-style:solid;
+    border-color:#99CCFF;
+    border-width:2px;
+    border-radius:6px;
+
+
+    width:70%;
+    height: 300px;
+    margin-top: 5px;
+    margin-right:5%;
+    padding: 0 15px;
+    background: #2d2d2d; /* browsers that don't support rgba */
+    /*background: rgba(45,45,45,.15);*/
+    background-color:white;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    border: 1px solid #3d3d3d; /* browsers that don't support rgba */
+    border: 1px solid rgba(255,255,255,.15);
+    -moz-box-shadow: 0 2px 3px 0 rgba(0,0,0,.1) inset;
+    -webkit-box-shadow: 0 2px 3px 0 rgba(0,0,0,.1) inset;
+    box-shadow: 0 2px 3px 0 rgba(0,0,0,.1) inset;
+    font-family: 'PT Sans', Helvetica, Arial, sans-serif;
+    font-size: 20px;
+    /*color: #fff;*/
+    text-shadow: 0 1px 2px rgba(0,0,0,.1);
+    -o-transition: all .2s;
+    -moz-transition: all .2s;
+    -webkit-transition: all .2s;
+    -ms-transition: all .2s;
+}
+
+.mySelectClassDays {
+    margin-top:3%;
+    margin-bottom:3%;
+    margin-left:5%;
+}
+
+.myMsgLine {
+    margin-top:2%;
+    font-size:x-large;
+    float:right;
+    margin-right:6%;
+
+}
+
+.totalMsgBG {
+    /*text-align:center;*/
+    background-color:yellow;
+    margin-right:5%;
+}
+
+
+
+/*.myUpdateCourseInfo {
+    margin-top:0px;
+    background-color:#DDFFFF;
+}*/
+
+.mythead1 {
+    color:#990066;
+}
+
+.myCourseInfoTable {
+    text-align:center;
+}
+
+
+.myTableFont_Large {
+    font-size:large;
+}
+
+
+.myUpdateCourseInfo_2 {
+    margin:0px;
+}
+
+.myRebackLabel {
+    font-size:x-large;
+    color:#00FF66;
+}
+
+.myEditLabel {
+    font-size:x-large;
+    color:#66CCFF;
+}
+
+.EditSpace {
+    float:right;
+    margin-right:5%;
+}
+
+.myBackSpace {
+    margin-left:5%;
+}
+
+
+.mySetScoreTextBox {
+    /*width:50%;*/
+    margin-left:0px;
+    margin-top:0px;
+    width:80px;
+    height:30px;
+    color:blue;
+}
+/*------------------------------教师部分样式（结束）------------------------------------------*/
+
+.myTipTitleColor {
+    color:yellow;
+}
+

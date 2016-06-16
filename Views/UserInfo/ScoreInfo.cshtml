@@ -1,0 +1,181 @@
+﻿@{
+    Layout = null;
+    int i = 0;
+    int totalCredit =0 ;
+}
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="~/MyContent/images/LOGO2.jpg" rel="shortcut icon" />
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>学生成绩查询</title>
+
+    <link href="~/MyContent/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/MyContent/css/UserInfoCss.css" rel="stylesheet" />
+
+</head>
+<body>
+
+    <div class="headerLogo">
+        <img class="Logo" src="~/MyContent/images/logo-title.png" />
+    </div>
+    <div class="headerLabel">
+        <span><span class="glyphicon glyphicon-user " aria-hidden="true"></span></span> <span class="myHeaderSpanLabel">@ViewBag.Stu.StuName</span> <span class="myHeaderSpanLabel">，您好！</span> <span><span class="myHeaderSpanLabel">专业：</span><span class="myHeaderSpanLabel2">@ViewBag.Stu.Major</span></span>&nbsp;&nbsp;<span><span class="myHeaderSpanLabel">班级：</span><span class="myHeaderSpanLabel2">@ViewBag.Stu.ClassName</span></span>&nbsp;&nbsp;<span> <span class="myHeaderSpanLabel">学号：</span> <span class="myHeaderSpanLabel2">@ViewBag.Stu.StuNum</span> </span>
+    </div>
+    <!--------------------------------导航条开始----------------------------------------------------->
+
+    <nav class="navbar navbar-default navbar-inverse mynav">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @*<a class="navbar-brand" href="#">Brand</a>*@
+
+                <img class="navbar-brand" src="~/MyContent/images/LOGO2.png" />
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav" id="mynavUl">
+                    <li id="mynavL1">@Html.ActionLink("个人信息","Student","UserInfo")</li>
+                    <li id="mynavL2" class="active"><a href="javascript:void(0);" >成绩信息查询 <span class="sr-only">(current)</span></a></li>
+                    <li id="mynavL3"> @Html.ActionLink("任意选修课网上选课","ShowSelectClassInfo","UserInfo") </li>
+                    @*<li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">Separated link</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">One more separated link</a></li>
+                        </ul>
+                    </li>*@
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/Home/Exist"><span class="glyphicon glyphicon-log-in mySuccess" aria-hidden="true"></span>&nbsp; 重新登录</a></li>
+                    <li><a href="/Home/Exist"><span class="glyphicon glyphicon-log-out myError" aria-hidden="true"></span>&nbsp; 退出</a></li>
+                    
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+    <!--------------------------------导航条结束----------------------------------------------------->
+    <!--------------------------主内容开始-------------------------------------------------------->
+    <div class="score_main_content">
+        <div class="main_content_left">
+            <div class="main_content_left_0"> <span class="glyphicon glyphicon-wrench myNewSpanColor" aria-hidden="true"></span>&nbsp;  相关操作 </div>
+
+            <div class="main_content_left_content">
+                <div class="main_content_left_1" id="mynavLeft1"> &nbsp; <span class="glyphicon glyphicon-search myNewSpanColor" aria-hidden="true"></span>&nbsp; @Html.ActionLink("成绩信息查询", "ScoreInfo", "UserInfo") </div>
+                @*<div class="main_content_left_1" id="mynavLeft2"> &nbsp; <a href="javascript:void(0);" onclick="UpdatePwd()">修改密码</a> </div>*@
+            </div>
+        </div>
+       
+        <!---------------------------左右两边分割线-------------------------------------------->
+        <div class="main_content_right">
+            <div>
+                <div class="main_content_right_0">&nbsp;&nbsp;&nbsp;&nbsp;当前位置：学生 -----> 学生成绩查询 </div>
+            </div>
+
+            <div class="main_content_right_content">
+                <div class="main_content_right_content_title">学生成绩查询</div>
+
+                <div class="score_main_content_right_content_1">
+                    <div class="mydiv1" id="mydiv1"> 
+                        
+                        <hr />
+                        <table id="t1">
+                            <tr class="myTopTr"><th>学年</th><th>学期</th><th>课程名称</th><th>课程类型</th><th>任课教师</th><th>考核方式</th><th>平时成绩</th><th>期中成绩</th><th>实验成绩</th><th>期末成绩</th><th>总评成绩</th><th>补考成绩</th><th>重修成绩</th><th>应得学分</th><th>学分绩点</th></tr>
+                            
+                            @foreach (var gs in ViewBag.StuScoreList) { 
+                                if (i == 0) { 
+                                <tr class="myOtherTr"><td>@gs.LearnYear</td><td>@gs.LearnQi</td><td>@gs.CourseName</td><td>@gs.CourseType</td><td>@gs.TeacherName</td><td>@gs.CheckWay</td><td>@gs.Grade1</td><td>@gs.Grade2</td><td>@gs.Grade3</td><td>@gs.Grade4</td><td>@gs.Grade</td><td>@gs.Grade5</td><td>@gs.Grade6</td><td>@gs.Credit</td><td>1</td></tr>
+                                    i = 1;
+                                    totalCredit += Convert.ToInt32( gs.Credit);
+                                }
+                                else
+                                {
+                                    <tr class="myOtherTr myTrBackgroudcolor"><td>@gs.LearnYear</td><td>@gs.LearnQi</td><td>@gs.CourseName</td><td>@gs.CourseType</td><td>@gs.TeacherName</td><td>@gs.CheckWay</td><td>@gs.Grade1</td><td>@gs.Grade2</td><td>@gs.Grade3</td><td>@gs.Grade4</td><td>@gs.Grade</td><td>@gs.Grade5</td><td>@gs.Grade6</td><td>@gs.Credit</td><td>1</td></tr>
+                                    i = 0;
+                                    totalCredit += Convert.ToInt32(gs.Credit);
+                                }
+                            }
+                            <tr class="myOtherTr"><td ><span class="myTopTitle">总学分：</span></td><td colspan="14" class="myLeftTd">@totalCredit</td></tr>
+                           @for (int k = 0; k <0; k++)
+{
+    <tr class="myOtherTr "><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+}
+                        </table>
+                        <hr />
+                        <table id="t3">
+                            <tr class="myOtherTr"><th colspan="15"><span class="myTopTitle">历年未通过课程：</span></th></tr>
+                            <tr class="myTopTr"><th>学年</th><th>学期</th><th>课程名称</th><th>课程类型</th><th>任课教师</th><th>考核方式</th><th>平时成绩</th><th>期中成绩</th><th>实验成绩</th><th>期末成绩</th><th>总评成绩</th><th>补考成绩</th><th>重修成绩</th><th>应得学分</th><th>学分绩点</th></tr>
+                          @foreach (var gs in ViewBag.StuScoreList) {
+                              if (Convert.ToInt32(gs.Grade) < 60) { 
+                                if (i == 1) {
+                                    <tr class="myOtherTr"><td>@gs.LearnYear</td><td>@gs.LearnQi</td><td>@gs.CourseName</td><td>@gs.CourseType</td><td>@gs.TeacherName</td><td>@gs.CheckWay</td><td>@gs.Grade1</td><td>@gs.Grade2</td><td>@gs.Grade3</td><td>@gs.Grade4</td><td>@gs.Grade</td><td>@gs.Grade5</td><td>@gs.Grade6</td><td>@gs.Credit</td><td>1</td></tr>
+                                    i = 0;
+                                }
+                                else
+                                {
+                                    <tr class="myOtherTr myTrBackgroudcolor"><td>@gs.LearnYear</td><td>@gs.LearnQi</td><td>@gs.CourseName</td><td>@gs.CourseType</td><td>@gs.TeacherName</td><td>@gs.CheckWay</td><td>@gs.Grade1</td><td>@gs.Grade2</td><td>@gs.Grade3</td><td>@gs.Grade4</td><td>@gs.Grade</td><td>@gs.Grade5</td><td>@gs.Grade6</td><td>@gs.Credit</td><td>1</td></tr>
+                                    i = 1;
+                                }
+                                }
+                            }
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <br />
+        </div>
+    </div>
+
+    <!--------------------------主内容结束-------------------------------------------------------->
+    <hr />
+    <!-----------------------系统帮助和说明模板框（开始）---------------------------------------->
+    <div id="Timer">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary btn-lg myHide" data-toggle="modal" data-target="#myModal">
+            Launch demo modal
+        </button>
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">系统帮助和说明</h4>
+                    </div>
+                    <div class="modal-body">
+                        ...
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-----------------------系统帮助和说明模板框（结束）---------------------------------------->
+    <div class="footerLink"><p>友情链接：<a href="http://glyphicons.com/"> Glyphicons </a> | <a href="javascript:void(0);" onclick="myHelpLink()"> <span class="glyphicon glyphicon-question-sign " aria-hidden="true"></span> 系统帮助和说明</a> </p></div>
+    <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+    <script src="~/MyContent/javascript/jquery-2.1.4.min.js"></script>
+    <script src="~/MyContent/javascript/bootstrap.min.js"></script>
+    <script src="~/MyContent/javascript/stuJS.js"></script>
+</body>
+</html>
+

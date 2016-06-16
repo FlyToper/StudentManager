@@ -1,0 +1,387 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="~/MyContent/images/LOGO2.jpg" rel="shortcut icon" />
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>教师个人信息</title>
+
+    <link href="~/MyContent/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/MyContent/css/UserInfoCss.css" rel="stylesheet" />
+    <link href="~/MyContent/css/myInfo.css" rel="stylesheet" />
+</head>
+<body>
+
+    <div class="headerLogo">
+        @*<img class="Logo" src="~/MyContent/images/logo-title.png" />*@
+        <img class="Logo" src="~/MyContent/images/header6.jpg" />
+    </div>
+    <div class="headerLabel">
+        <span><span class="glyphicon glyphicon-user " aria-hidden="true"></span></span> <span class="myHeaderSpanLabel">@ViewBag.Teacher.TeacherName</span> <span class="myHeaderSpanLabel">，您好！</span> <span><span class="myHeaderSpanLabel">专业：</span><span class="myHeaderSpanLabel2">@ViewBag.Teacher.Major</span></span>&nbsp;&nbsp;<span> <span class="myHeaderSpanLabel">学历：</span> <span class="myHeaderSpanLabel2">@ViewBag.Teacher.Education</span> </span>&nbsp;&nbsp;<span><span class="myHeaderSpanLabel">职称：</span><span class="myHeaderSpanLabel2">@ViewBag.Teacher.Position</span></span>&nbsp;&nbsp;<span> <span class="myHeaderSpanLabel">教职工编号：</span> <span class="myHeaderSpanLabel2">@ViewBag.Teacher.TeacherNum</span> </span>
+    </div>
+    <!--------------------------------导航条开始----------------------------------------------------->
+
+    <nav class="navbar navbar-default navbar-inverse mynav">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @*<a class="navbar-brand" href="#">Brand</a>*@
+
+                <img class="navbar-brand" src="~/MyContent/images/LOGO2.png" />
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav" id="mynavUl">
+                    <li class="active" id="mynavL1"><a href="javascript:void(0);">个人信息 <span class="sr-only">(current)</span></a></li>
+                    <li id="mynavL2">@Html.ActionLink("课程管理", "UpdateCourseInfo", "UserInfo")</li>
+                    <li id="munavL3">@Html.ActionLink("学生管理", "StudentManage", "UserInfo") </li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/Home/Exist"><span class="glyphicon glyphicon-log-in mySuccess" aria-hidden="true"></span>&nbsp; 重新登录</a></li>
+                    <li><a href="/Home/Exist"><span class="glyphicon glyphicon-log-out myError" aria-hidden="true"></span>&nbsp; 退出</a></li>
+                    
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+    <!--------------------------------导航条结束----------------------------------------------------->
+    <!--------------------------主内容开始-------------------------------------------------------->
+    <div class="main_content UerInfo_main" id="teacher_main_content">
+        <div class="main_content_left">
+            <div class="main_content_left_0"> <span class="glyphicon glyphicon-wrench myNewSpanColor" aria-hidden="true"></span>&nbsp;  相关操作 </div>
+
+            <div class="main_content_left_content">
+                <div class="main_content_left_1" id="mynavLeft1"> &nbsp; <span class="glyphicon glyphicon-search myNewSpanColor" aria-hidden="true"></span>&nbsp;@Html.ActionLink("教师基本信息查询", "Teacher", "UserInfo") </div>
+                <div class="main_content_left_1" id="mynavLeft2"> &nbsp; <span class="glyphicon glyphicon-edit myNewSpanColor" aria-hidden="true"></span>&nbsp; <a href="javascript:void(0);" onclick="UpdatePwd()">修改密码</a> </div>
+            </div>
+        </div>
+        <!---------------------------左右两边分割线-------------------------------------------->
+        <div class="main_content_right">
+            <div>
+                <div class="main_content_right_0">&nbsp;&nbsp;&nbsp;&nbsp;当前位置：教师 -----> 教师信息查询 </div>
+            </div>
+
+            <div class="main_content_right_content">
+                <div class="main_content_right_content_title">教师基本信息查询</div>
+               
+                <div class="main_content_right_content_1">
+                    <div class="mydiv2 TeacherUserInfo" id="mydiv1">
+                        
+                        <!--------------教师个人信息框开始----------------------->
+                        
+                        @*<div class="myinfo">
+                            <hr class="myhr" />
+                            <div class="myinfo-first">
+                                <span class="mylabel ">登录账号：</span>@Session["UserNum"].ToString()<br />
+                                <span class="myinfo_topbtn"><input type="button" class="myEditBtn" value="修改全部" id="allBtn" /> </span>
+                            </div>
+                            <hr class="myhr" />
+
+                            <div class="myinfo-second">
+                                <span>
+                                    <span class="mylabel">姓名：</span>
+                                </span>&nbsp;
+                                <span class="myinfo-hide-textbox myhidedisplay" id="TeacherNameHideText"><input type="text" class="myinput" value="@ViewBag.Teacher.TeacherName" id="TeacherNameSaveText" />&nbsp;<input type="button" value="保存" class="mybutton" id="TeacherNameSaveBtn" /><span id="TeacherNameErrorMsg"></span></span>
+                                <span class="myinfo-tip" id="TeacherNameTip">@ViewBag.Teacher.TeacherName</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="myinfo_Trip" id="myinfo_Trip_TeacherName"></span>
+                                <span class="myshowSet" id="Sex_showSet">
+                                    @if (ViewBag.Teacher.TeacherName == "")
+                                    {<span><span class="errorMsg"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> 未设置 </span>| <input type="button" value="设置" class="myEditBtn disabled" id="TeacherNameBtn" disabled="disabled" /></span> }
+                                    else
+                                    {<span><span class="successMsg"><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span> 已设置 </span>| <input type="button" value="修改" class="myEditBtn disabled" id="TeacherNameBtn" disabled="disabled" /> </span>
+                                    }
+                                </span>
+                            </div>
+
+                            <hr class="myhr" />
+
+                            <div class="myinfo-second">
+                                <span>
+                                    <span class="mylabel">性别：</span>
+                                </span>&nbsp;
+                                <span class="myinfo-hide-textbox myhidedisplay" id="SexHideText"><input type="text" class="myinput" value="@ViewBag.Teacher.Sex" id="SexSaveText" readonly="readonly" />&nbsp;<input type="button" value="保存" class="mybutton" id="SexSaveBtn" /><span id="SexErrorMsg"></span></span>
+                                <span class="myinfo-tip" id="SexTip">@ViewBag.Teacher.Sex</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="myinfo_Trip" id="myinfo_Trip_Sex"></span>
+                                <span class="myshowSet" id="Sex_showSet">
+                                    @if (ViewBag.Teacher.Sex == "")
+                                    {<span><span class="errorMsg"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> 未设置 </span>| <input type="button" value="设置" class="myEditBtn" id="SexBtn" /></span> }
+                                    else
+                                    {<span><span class="successMsg"><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span> 已设置 </span>| <input type="button" value="修改" class="myEditBtn" id="SexBtn" /> </span>
+                                    }
+                                </span>
+                            </div>
+
+                            <hr class="myhr" />
+
+                            <div class="myinfo-second">
+                                <span>
+                                    <span class="mylabel">身份证号码：</span>
+                                </span>&nbsp;
+                                <span class="myinfo-hide-textbox myhidedisplay" id="IdentityCardHideText"><input type="text" class="myinput" value="@ViewBag.Teacher.IdentityCard" id="IdentityCardSaveText" />&nbsp;<input type="button" value="保存" class="mybutton" id="IdentityCardSaveBtn" /><span id="IdentityCardErrorMsg"></span></span>
+                                <span class="myinfo-tip" id="IdentityCardTip">@ViewBag.Teacher.IdentityCard</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="myinfo_Trip" id="myinfo_Trip_IdentityCard"></span>
+                                <span class="myshowSet" id="IdentityCard_showSet">
+                                    @if (ViewBag.Teacher.IdentityCard == "")
+                                    {<span><span class="errorMsg"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> 未设置 </span>| <input type="button" value="设置" class="myEditBtn" id="IdentityCardBtn" /></span> }
+                                    else
+                                    {<span><span class="successMsg"><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span> 已设置 </span>| <input type="button" value="修改" class="myEditBtn" id="IdentityCardBtn" /> </span>
+                                    }
+                                </span>
+                            </div>
+
+                            <hr class="myhr" />
+
+                            <div class="myinfo-second">
+                                <span>
+                                    <span class="mylabel">学历：</span>
+                                </span>&nbsp;
+                                <span class="myinfo-hide-textbox myhidedisplay" id="EducationHideText"><input type="text" class="myinput" value="@ViewBag.Teacher.Education" id="EducationSaveText" />&nbsp;<input type="button" value="保存" class="mybutton" id="EducationSaveBtn" /><span id="EducationErrorMsg"></span></span>
+                                <span class="myinfo-tip" id="EducationTip">@ViewBag.Teacher.Education</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="myinfo_Trip" id="myinfo_Trip_Education"></span>
+                                <span class="myshowSet" id="Education_showSet">
+                                    @if (ViewBag.Teacher.Education == "")
+                                    {<span><span class="errorMsg"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> 未设置 </span>| <input type="button" value="设置" class="myEditBtn" id="EducationBtn" /></span> }
+                                    else
+                                    {<span><span class="successMsg"><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span> 已设置 </span>| <input type="button" value="修改" class="myEditBtn" id="EducationBtn" /> </span>
+                                    }
+                                </span>
+                            </div>
+
+                            <hr class="myhr" />
+
+                            <div class="myinfo-second">
+                                <span>
+                                    <span class="mylabel">职位：</span>
+                                </span>&nbsp;
+                                <span class="myinfo-hide-textbox myhidedisplay" id="PositionHideText"><input type="text" class="myinput" value="@ViewBag.Teacher.Position" id="PositionSaveText" />&nbsp;<input type="button" value="保存" class="mybutton" id="PositionSaveBtn" /><span id="PositionErrorMsg"></span></span>
+                                <span class="myinfo-tip" id="PositionTip">@ViewBag.Teacher.Position</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="myinfo_Trip" id="myinfo_Trip_Position"></span>
+                                <span class="myshowSet" id="Position_showSet">
+                                    @if (ViewBag.Teacher.Position == "")
+                                    {<span><span class="errorMsg"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> 未设置 </span>| <input type="button" value="设置" class="myEditBtn" id="PositionBtn" /></span> }
+                                    else
+                                    {<span><span class="successMsg"><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span> 已设置 </span>| <input type="button" value="修改" class="myEditBtn" id="PositionBtn" /> </span>
+                                    }
+                                </span>
+                            </div>
+
+                            <hr class="myhr" />
+
+                            <div class="myinfo-second">
+                                <span>
+                                    <span class="mylabel">专业：</span>
+                                </span>&nbsp;
+                                <span class="myinfo-hide-textbox myhidedisplay" id="MajorHideText"><input type="text" class="myinput" value="@ViewBag.Teacher.Major" id="MajorSaveText" />&nbsp;<input type="button" value="保存" class="mybutton" id="MajorSaveBtn" /><span id="MajorErrorMsg"></span></span>
+                                <span class="myinfo-tip" id="MajorTip">@ViewBag.Teacher.Major</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="myinfo_Trip" id="myinfo_Trip_Major"></span>
+                                <span class="myshowSet" id="Major_showSet">
+                                    @if (ViewBag.Teacher.Major == "")
+                                    {<span><span class="errorMsg"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> 未设置 </span>| <input type="button" value="设置" class="myEditBtn" id="MajorBtn" /></span> }
+                                    else
+                                    {<span><span class="successMsg"><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span> 已设置 </span>| <input type="button" value="修改" class="myEditBtn" id="MajorBtn" /> </span>
+                                    }
+                                </span>
+                            </div>
+
+                            <hr class="myhr" />
+
+                            <div class="myinfo-second">
+                                <span>
+                                    <span class="mylabel">学院：</span>
+                                </span>&nbsp;
+                                <span class="myinfo-hide-textbox myhidedisplay" id="InstituteNameHideText"><input type="text" class="myinput" value="@ViewBag.Teacher.InstituteName" id="InstituteNameSaveText" />&nbsp;<input type="button" value="保存" class="mybutton" id="InstituteNameSaveBtn" /><span id="InstituteNameErrorMsg"></span></span>
+                                <span class="myinfo-tip" id="InstituteNameTip">@ViewBag.Teacher.InstituteName</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="myinfo_Trip" id="myinfo_Trip_InstituteName"></span>
+                                <span class="myshowSet" id="InstituteName_showSet">
+                                    @if (ViewBag.Teacher.InstituteName == "")
+                                    {<span><span class="errorMsg"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> 未设置 </span>| <input type="button" value="设置" class="myEditBtn" id="InstituteNameBtn" /></span> }
+                                    else
+                                    {<span><span class="successMsg"><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span> 已设置 </span>| <input type="button" value="修改" class="myEditBtn" id="InstituteNameBtn" /> </span>
+                                    }
+                                </span>
+                            </div>
+
+                            <hr class="myhr" />
+
+                            <div class="myinfo-second">
+                                <span>
+                                    <span class="mylabel">邮箱：</span>
+                                </span>&nbsp;
+                                <span class="myinfo-hide-textbox myhidedisplay" id="EmailHideText"><input type="text" class="myinput myinfo-tip" value="@ViewBag.Teacher.Email" id="EmailSaveText" />&nbsp;<input type="button" value="保存" class="mybutton" id="EmailSaveBtn" /><span id="EmailErrorMsg"></span></span>
+                                <span class="myinfo-tip" id="EmailTip">@ViewBag.Teacher.Email</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="myinfo_Trip" id="myinfo_Trip_Email"></span>
+                                <span class="myshowSet" id="Email_showSet">
+                                    @if (ViewBag.Teacher.Email == "")
+                                    {<span><span class="errorMsg"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> 未设置 </span>| <input type="button" value="设置" class="myEditBtn" id="EmailBtn" /></span> }
+                                    else
+                                    {<span><span class="successMsg"><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span> 已设置 </span>| <input type="button" value="修改" class="myEditBtn" id="EmailBtn" /> </span>
+                                    }
+                                </span>
+                            </div>
+
+                            <hr class="myhr" />
+
+                            <div class="myinfo-second">
+                                <span>
+                                    <span class="mylabel">联系电话：</span>
+                                </span>&nbsp;
+                                <span class="myinfo-hide-textbox myhidedisplay" id="PhoneHideText"><input type="text" class="myinput" value="@ViewBag.Teacher.Phone" id="PhoneSaveText" />&nbsp;<input type="button" value="保存" class="mybutton" id="PhoneSaveBtn" /><span id="PhoneErrorMsg"></span></span>
+                                <span class="myinfo-tip" id="PhoneTip">@ViewBag.Teacher.Phone</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="myinfo_Trip" id="myinfo_Trip_Phone"></span>
+                                <span class="myshowSet" id="Phone_showSet">
+                                    @if (ViewBag.Teacher.Phone == "")
+                                    {<span><span class="errorMsg"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> 未设置 </span>| <input type="button" value="设置" class="myEditBtn" id="PhoneBtn" /></span> }
+                                    else
+                                    {<span><span class="successMsg"><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span> 已设置 </span>| <input type="button" value="修改" class="myEditBtn" id="PhoneBtn" /> </span>
+                                    }
+                                </span>
+                            </div>
+
+                            <hr class="myhr" />
+
+                            <div class="myinfo-second">
+                                <span>
+                                    <span class="mylabel">主讲课程一：</span>
+                                </span>&nbsp;
+                                <span class="myinfo-hide-textbox myhidedisplay" id="CourseName1HideText"><input type="text" class="myinput" value="@ViewBag.Teacher.CourseName1" id="CourseName1SaveText" />&nbsp;<input type="button" value="保存" class="mybutton" id="CourseName1SaveBtn" /><span id="CourseName1ErrorMsg" ></span></span>
+                                <span class="myinfo-tip" id="CourseName1Tip">@ViewBag.Teacher.CourseName1</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="myinfo_Trip" id="myinfo_Trip_CourseName1"></span>
+                                <span class="myshowSet" id="CourseName1_showSet">
+                                    @if (ViewBag.Teacher.CourseName1 == "")
+                                    {<span><span class="errorMsg"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> 未设置 </span>| <input type="button" value="设置" class="myEditBtn" id="CourseName1Btn" /></span> }
+                                    else
+                                    {<span><span class="successMsg"><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span> 已设置 </span>| <input type="button" value="修改" class="myEditBtn" id="CourseName1Btn" /> </span>
+                                    }
+                                </span>
+                            </div>
+
+                            <hr class="myhr" />
+
+                            <div class="myinfo-second">
+                                <span>
+                                    <span class="mylabel">主讲课程二：</span>
+                                </span>&nbsp;
+                                <span class="myinfo-hide-textbox myhidedisplay" id="CourseName2HideText"><input type="text" class="myinput" value="@ViewBag.Teacher.CourseName2" id="CourseName2SaveText" />&nbsp;<input type="button" value="保存" class="mybutton" id="CourseName2SaveBtn" /><span id="CourseName2ErrorMsg"></span></span>
+                                <span class="myinfo-tip" id="CourseName2Tip">@ViewBag.Teacher.CourseName2</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="myinfo_Trip" id="myinfo_Trip_CourseName2"></span>
+                                <span class="myshowSet" id="CourseName2_showSet">
+                                    @if (ViewBag.Teacher.CourseName2 == "")
+                                    {<span><span class="errorMsg"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> 未设置 </span>| <input type="button" value="设置" class="myEditBtn" id="CourseName2Btn" /></span> }
+                                    else
+                                    {<span><span class="successMsg"><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span> 已设置 </span>| <input type="button" value="修改" class="myEditBtn" id="CourseName2Btn" /> </span>
+                                    }
+                                </span>
+                            </div>
+
+                            <hr class="myhr" />
+
+                            <div class="myinfo-second">
+                                <span>
+                                    <span class="mylabel">主讲课程三：</span>
+                                </span>&nbsp;
+                                <span class="myinfo-hide-textbox myhidedisplay" id="CourseName3HideText"><input type="text" class="myinput" value="@ViewBag.Teacher.CourseName3" id="CourseName3SaveText" />&nbsp;<input type="button" value="保存" class="mybutton" id="CourseName3SaveBtn" /><span id="CourseName3ErrorMsg"></span></span>
+                                <span class="myinfo-tip" id="CourseName3Tip">@ViewBag.Teacher.CourseName3</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="myinfo_Trip" id="myinfo_Trip_CourseName3"></span>
+                                <span class="myshowSet" id="CourseName3_showSet">
+                                    @if (ViewBag.Teacher.CourseName3 == "")
+                                    {<span><span class="errorMsg"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span> 未设置 </span>| <input type="button" value="设置" class="myEditBtn" id="CourseName3Btn" /></span> }
+                                    else
+                                    {<span><span class="successMsg"><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span> 已设置 </span>| <input type="button" value="修改" class="myEditBtn" id="CourseName3Btn" /> </span>
+                                    }
+                                </span>
+                            </div>
+
+                            <hr class="myhr" />
+
+                            <div class="myinfo-second">
+                                <span class="myinfo_topbtn"><input type="button" class="myEditBtn" value="修改全部" id="allBtn2" /> </span>
+                            </div>
+
+                            <hr  class="myhr"/>
+
+                    </div>*@
+
+                        <table id="StuInfoTable">
+                            <tr class="mytr2 mytr2-1 "><th>登录帐号：</th><td>&nbsp;@ViewBag.Teacher.TeacherNum</td><th>姓名：</th><td>&nbsp;@ViewBag.Teacher.TeacherName</td></tr>
+                            <tr class="mytr2-1 ">
+                                <th>身份证号：</th>
+                                <td>&nbsp;@ViewBag.Teacher.IdentityCard</td>
+                                <th>性别：</th>
+                                <td>&nbsp;@ViewBag.Teacher.Sex</td>
+                            </tr>
+                            <tr class="mytr2 mytr2-1 "><th>注册时间：</th><td>&nbsp;@ViewBag.Teacher.SubDate</td><th>状态：</th><td>&nbsp;@ViewBag.Teacher.State</td></tr>
+                            <tr class="mytr2-1 "><th>所属学院：</th><td>&nbsp;@ViewBag.Teacher.InstituteName</td><th>专业：</th><td>&nbsp;@ViewBag.Teacher.Major</td></tr>
+                            <tr class="mytr2 mytr2-1 "><th>所在职位：</th><td>&nbsp;@ViewBag.Teacher.Position</td><th>学历：</th><td>&nbsp;@ViewBag.Teacher.Education</td></tr>
+                            <tr class="mytr2-1 "><th>主讲课程一：</th><td>&nbsp;@ViewBag.Teacher.CourseName1</td><th>电话：</th><td>&nbsp;@ViewBag.Teacher.Phone</td></tr>
+                            <tr class="mytr2 mytr2-1 "><th>主讲课程二：</th><td>&nbsp;@ViewBag.Teacher.CourseName2</td><th>邮箱：</th><td>&nbsp;@ViewBag.Teacher.Email</td></tr>
+                            <tr class="mytr2-1 "><th>主讲课程三：</th><td>&nbsp;@ViewBag.Teacher.CourseName3</td><th>备注：</th><td>&nbsp;@ViewBag.Teacher.Remark</td></tr>
+                            <tr class="mytr3"><td colspan="6"><a href="javascript:void(0);" onclick="TeacherInfoEditClick()">【编辑】</a> <a href="javascript:void(0);" id="btnDownLoadClick" data-toggle="tooltip" data-placement="right" title="<h5> <span class='myTipTitleColor'>下载个人信息生成 Excel 表格</span></h5>">【下载】</a></td></tr>
+                        </table>
+                        <hr />
+                        <table class="myHide" id="StuEditTable">
+                            <tr class="mytr3"><td colspan="2">【<text class="mythead"> 当前权限所具有的操作</text>】</tr>
+                            <tr class="mytr2"><th>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;联系电话：</th><td><input type="text" value="@ViewBag.Teacher.Phone" id="editPhone" data-toggle="tooltip" data-placement="right" title="<h5> <span class='myTipTitleColor'>请填写11位有效电话号码！</span></h5>" /></td></tr>
+                            <tr class="mytr2"><th>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;邮&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;箱：</th><td><input type="text" value="@ViewBag.Teacher.Email" id="editEmail" data-toggle="tooltip" data-placement="right" title="<h5> <span class='myTipTitleColor'>例:someone@example.com</span></h5>" /></tr>
+                            @*例：someone@example.com*@
+                            <tr class="mytr2"><th>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;主讲课程一：</th><td><input type="text" value="@ViewBag.Teacher.CourseName1" id="editCourseName1" data-toggle="tooltip" data-placement="right" title="<h5> <span class='myTipTitleColor'>例：数据库系统原理与设计【长度小于20个字符】</span></h5>" maxlength="20" /></tr>
+                            <tr class="mytr2"><th>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;主讲课程二：</th><td><input type="text" value="@ViewBag.Teacher.CourseName2" id="editCourseName2" data-toggle="tooltip" data-placement="right" title="<h5> <span class='myTipTitleColor'>例：数据库系统原理与设计【长度小于20个字符】</span></h5>" maxlength="20" /></tr>
+                            <tr class="mytr2"><th>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;主讲课程三：</th><td><input type="text" value="@ViewBag.Teacher.CourseName3" id="editCourseName3" data-toggle="tooltip" data-placement="right" title="<h5> <span class='myTipTitleColor'>例：数据库系统原理与设计【长度小于20个字符】</span></h5>" maxlength="20" /></tr>
+                            <tr class="mytr3"><td colspan="2"><a href="javascript:void(0);" onclick="TeacherSaveClick()">【保存】</a> | <a href="javascript:void(0);" onclick="TeacherInfoEditClick() ">【取消】</a></td></tr>
+                            <tr class="mytr3"><td colspan="2" id="stuSaveMsg"></td></tr>
+                        </table>
+                        @*<p class="tooltip-options">
+                            这是一个 <a href="#" data-toggle="tooltip" title= "<h2> am Header2</h2>">Tooltip 方法 options</a>.
+                            
+                        </p>*@
+
+
+                        <!--------------教师个人信息框结束----------------------->
+
+                    </div>
+                </div> 
+               
+            </div>
+        </div>
+    </div>
+
+    <!--------------------------主内容结束-------------------------------------------------------->
+
+    <hr />
+
+    <!-----------------------系统帮助和说明模板框（开始）---------------------------------------->
+    <div id="Timer">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary btn-lg myHide" data-toggle="modal" data-target="#myModal">
+            Launch demo modal
+        </button>
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">系统帮助和说明</h4>
+                    </div>
+                    <div class="modal-body">
+                        ...
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-----------------------系统帮助和说明模板框（结束）---------------------------------------->
+
+    <div class="footerLink"><p>友情链接：<a href="http://glyphicons.com/"> Glyphicons </a> | <a href="javascript:void(0);" onclick="myHelpLink()"> <span class="glyphicon glyphicon-question-sign " aria-hidden="true"></span> 系统帮助和说明</a> </p></div>
+    <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+    <script src="~/MyContent/javascript/jquery-2.1.4.min.js"></script>
+    <script src="~/MyContent/javascript/bootstrap.min.js"></script>
+    <script src="~/MyContent/javascript/teacherJS.js"></script>
+    <script src="~/MyContent/javascript/myInfoJS.js"></script>
+</body>
+</html>

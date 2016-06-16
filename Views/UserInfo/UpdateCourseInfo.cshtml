@@ -1,0 +1,520 @@
+﻿@{
+    Layout = null;
+    int i1 = 0;
+    int k = 1;
+}
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="~/MyContent/images/LOGO2.jpg" rel="shortcut icon" />
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>课程管理</title>
+
+    <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+    <script src="~/MyContent/javascript/jquery-2.1.4.min.js"></script>
+
+
+    @*<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" media="screen"
+              href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">*@
+
+    <link href="~/MyContent/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/MyContent/css/UserInfoCss.css" rel="stylesheet" />
+    <link href="~/MyContent/css/myInfo.css" rel="stylesheet" />
+
+</head>
+<body>
+
+    <div class="headerLogo">
+        <img class="Logo" src="~/MyContent/images/header6.jpg" />
+    </div>
+    <div class="headerLabel">
+        <span><span class="glyphicon glyphicon-user " aria-hidden="true"></span></span> <span class="myHeaderSpanLabel">@ViewBag.Teacher.TeacherName</span> <span class="myHeaderSpanLabel">，您好！</span> <span><span class="myHeaderSpanLabel">专业：</span><span class="myHeaderSpanLabel2">@ViewBag.Teacher.Major</span></span>&nbsp;&nbsp;<span> <span class="myHeaderSpanLabel">学历：</span> <span class="myHeaderSpanLabel2">@ViewBag.Teacher.Education</span> </span>&nbsp;&nbsp;<span><span class="myHeaderSpanLabel">职称：</span><span class="myHeaderSpanLabel2">@ViewBag.Teacher.Position</span></span>&nbsp;&nbsp;<span> <span class="myHeaderSpanLabel">教职工编号：</span> <span class="myHeaderSpanLabel2">@ViewBag.Teacher.TeacherNum</span> </span>
+    </div>
+    <!--------------------------------导航条开始----------------------------------------------------->
+
+    <nav class="navbar navbar-default navbar-inverse mynav">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @*<a class="navbar-brand" href="#">Brand</a>*@
+
+                <img class="navbar-brand" src="~/MyContent/images/LOGO2.png" />
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav" id="mynavUl">
+                    <li id="mynavL1">@Html.ActionLink("个人信息", "Teacher")</li>
+                    <li class="active" id="mynavL2"><a href="javascript:void(0);"> 课程管理 <span class="sr-only">(current)</span></a></li>
+                    <li id="munavL3">@Html.ActionLink("学生管理", "StudentManage", "UserInfo") </li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/Home/Exist"><span class="glyphicon glyphicon-log-in mySuccess" aria-hidden="true"></span>&nbsp; 重新登录</a></li>
+                    <li><a href="/Home/Exist"><span class="glyphicon glyphicon-log-out myError" aria-hidden="true"></span>&nbsp; 退出</a></li>
+
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+    <!--------------------------------导航条结束----------------------------------------------------->
+    <!--------------------------主内容开始-------------------------------------------------------->
+    <div class="main_content UerInfo_main" id="SubCourseInfo_main_content">
+        <div class="main_content_left">
+            <div class="main_content_left_0"> <span class="glyphicon glyphicon-wrench myNewSpanColor" aria-hidden="true"></span>&nbsp;  相关操作 </div>
+
+            <div class="main_content_left_content">
+               
+                @*<div class="main_content_left_1" id="mynavLeft2"> &nbsp; <a href="javascript:void(0);" onclick="UpdatePwd()">修改密码</a> </div>*@
+                <div class="main_content_left_1" id="mynavLeft1"> &nbsp; <span class="glyphicon glyphicon-edit myNewSpanColor" aria-hidden="true"></span>&nbsp; @Html.ActionLink("修改课程信息", "UpdateCourseInfo", "UserInfo") </div>
+                <div class="main_content_left_1" id="mynavLeft1"> &nbsp; <span class="glyphicon glyphicon-plus myNewSpanColor" aria-hidden="true"></span>&nbsp; @Html.ActionLink("发布课程", "SubCourseInfo", "UserInfo") </div>
+            </div>
+        </div>
+        <!---------------------------左右两边分割线-------------------------------------------->
+        <div class="main_content_right">
+            <div>
+                <div class="main_content_right_0">&nbsp;&nbsp;&nbsp;&nbsp;当前位置：教师 -----> 修改课程信息</div>
+            </div>
+
+            <div class="main_content_right_content">
+                <div class="main_content_right_content_title">修改课程信息</div>
+
+                <div class="UpdateCourseInfo_main_content_right_content_1">
+                    <div class="mydiv2 TeacherUserInfo" id="mydiv1">
+
+                        <!--------------教师个人信息框开始----------------------->
+
+                        <div class="myUpdateCourseInfo" id="myDiv3">
+                            @*<hr  class="myhr"/>*@
+                            <table class="myCourseInfoTable myTableFont_Large" id="t1">
+                                <thead>【<text class="mythead1"> 教师已发布课程信息</text>】</thead>
+                                <tr class="myTopTr"><th>编号</th> <th>课程号</th><th>课程名称</th><th>上课时间</th><th>上课地点</th> <th>提交时间</th><th>状态</th> <th>相关操作</th> </tr>
+                                
+                                @foreach (var CourseInfo in ViewBag.CourseList)
+                                {
+                                    if (i1 == 0)
+                                    {
+                                        <tr class="myOtherTr" id="tr_@k"><td>@k</td><td>@CourseInfo.CourseNum</td> <td>@CourseInfo.CourseName</td><td>@CourseInfo.ClassTime</td><td>@CourseInfo.ClassRoom</td><td>@CourseInfo.SubDate</td> <td>@CourseInfo.State</td> <td> <a href="javascript:void(0);" onclick="DelCourseInfo('@CourseInfo.CourseNum', '@k', '@CourseInfo.State')">删除</a> | <a href="javascript:void(0);" onclick="UpdateCourseInfo('@CourseInfo.CourseNum','@CourseInfo.State')">修改</a>  </td> </tr>
+                                        i1 = 1;
+                                        k++;
+                                    }
+                                    else
+                                    { <tr class="myOtherTr myTrBackgroudcolor" id="tr_@k"><td>@k</td><td>@CourseInfo.CourseNum</td> <td>@CourseInfo.CourseName</td><td>@CourseInfo.ClassTime</td><td>@CourseInfo.ClassRoom</td><td>@CourseInfo.SubDate</td> <td>@CourseInfo.State</td> <td> <a href="javascript:void(0);" onclick="DelCourseInfo('@CourseInfo.CourseNum', '@k', '@CourseInfo.State')">删除</a> | <a href="javascript:void(0);" onclick="UpdateCourseInfo('@CourseInfo.CourseNum', '@CourseInfo.State')">修改</a> </td> </tr>
+                                        i1 = 0;
+                                        k++;
+                                    }
+                                }
+                              
+                               
+                            </table>
+                            <hr class="myhr" />
+
+                        </div>
+
+                        <div id="myDiv3_2" class="myUpdateCourseInfo myHide">
+                            
+                            <div class="mydiv2 TeacherUserInfo" id="mydiv1">
+
+                                <!--------------教师个人信息框开始----------------------->
+
+                                <div class="myinfo myUpdateCourseInfo_2 " id="myDiv2">
+                                    @*<hr class="myhr" />*@
+                                    @*<div class="myinfo-first">
+                <span class="mylabel ">请输入课程信息</span>
+            </div>*@
+                                    <hr class="myhr" />
+
+                                    <div class="myinfo-second">
+                                         <a href="javascript:void(0);" onclick="BackBtnClick()"> <span class="myRebackLabel"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> 返回</span></a> 
+                                    </div>
+                                    <hr  class="myhr"/>
+                                    <div class="myinfo-second">
+                                        
+                                        <span>
+                                            <span class="mylabel">课程名字：</span>
+                                        </span>&nbsp;<input type="text" class="myInput" maxlength="20" id="txtCourseName" placeholder="请输入课程名字" />
+                                        &nbsp;&nbsp;<span class="myError myLargeFont"> * </span>
+
+                                        <span>
+                                            <span class="mylabel">课程号：</span> &nbsp;<input type="text" class="myInput" maxlength="20" id="txtCourseNum" placeholder="课程号" disabled="disabled" />
+                                        </span>
+                                        <span id="CourseNameErrorMsg"></span>
+
+                                        <span id="MsgOneLine"></span>
+                                    </div>
+
+                                    <hr class="myhr" />
+
+                                    <div class="myinfo-second">
+                                        <span>
+                                            <span class="mylabel">课程类型：</span>
+                                        </span>
+                                        <span>
+                                            <select class="myLoginSelect" name="courseType" id="courseType">
+                                                <option value="0" selected="selected">&nbsp;&nbsp;&nbsp;&nbsp; 请选择</option>
+                                                <option value="1">— 必修课 —</option>
+                                                <option value="2">— 选修课 —</option>
+                                                <option value="3">— 通识课 —</option>
+                                            </select>
+                                        </span>
+                                        <span style="margin-left:5%;">
+                                            <span>
+                                                <span class="mylabel">考察方式：</span>
+                                            </span>
+                                            <span>
+                                                <select class="myLoginSelect" name="checkType" id="checkType">
+                                                    <option value="0" selected="selected">请选择</option>
+                                                    <option value="1">考试方式</option>
+                                                    <option value="2">考察方式</option>
+                                                    <option value="3">其他方式</option>
+                                                </select>
+                                            </span>
+                                        </span>
+
+                                        <span id="MsgTwoLine"></span>
+                                    </div>
+
+                                    <hr class="myhr" />
+
+                                    <div class="myinfo-second">
+                                        <span>
+                                            <span class="mylabel">学分：</span>
+                                        </span>
+                                        <span>
+                                            <input type="text" class="myInput2" name="credit" id="txtCredit" maxlength="2" placeholder="请输入学分" />
+                                        </span>
+                                        <span style="margin-left:3%;">
+                                            <span>
+                                                <span class="mylabel">开班人数：</span>
+                                            </span>
+                                            <span>
+                                                <input type="text" maxlength="3" class="myInput2" name="Count" id="txtCount" placeholder="请输入人数" />
+                                            </span>
+                                        </span>
+                                        <span style="margin-left:3%;">
+                                            <span>
+                                                <span class="mylabel">上课教室：</span>
+                                            </span>
+                                            <span>
+                                                <input type="text" class="myInput2" id="txtClassRoom" placeholder="请输入地点" maxlength="10" />
+                                            </span>
+                                        </span>
+
+                                        <span id="MsgThreeLine"></span>
+                                    </div>
+
+                                    <hr class="myhr" />
+
+                                    <div class="myinfo-second">
+                                        <span>
+                                            <span class="mylabel">上课学年和学期：</span>
+                                        </span>
+                                        <span>
+                                            <input type="text" maxlength="4" class="myInput2 myInput3" id="txtBeginClassYear" placeholder="年份" />
+                                        </span>
+
+                                        <span class="myLabel2">—</span>
+                                        <span>
+                                            <input type="text" maxlength="4" class="myInput2 myInput3" id="txtEndClassYear" placeholder="年份" />
+                                        </span>
+                                        <span class="myLabel2">学年度， 第</span>
+                                        <span>
+                                            @*<input type="text" class="myInput2 myInput3" placeholder="01或02" />*@
+                                            <select class="myLoginSelect" id="team">
+                                                <option value="0" selected="selected">请选择</option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                            </select>
+                                        </span>
+                                        <span class="myLabel2">学期</span>
+
+                                        <span id="MsgFourLine"></span>
+
+                                    </div>
+
+                                    <hr class="myhr" />
+
+                                    <div class="myinfo-second">
+
+                                        <span class="mylabel">上课起始周：</span>
+                                        <span class="myLabel2">第</span>
+                                        <span>
+                                            <select class="myLoginSelect" id="beginWeek">
+                                                @*<option value="0" selected="selected">请选择</option>*@
+                                                <option value="1">1</option>
+                                                <option value="2" selected="selected">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                                <option value="10">10</option>
+                                                <option value="11">11</option>
+                                                <option value="12">12</option>
+                                                <option value="13">13</option>
+                                                <option value="14">14</option>
+                                                <option value="15">15</option>
+                                                <option value="16">16</option>
+                                                <option value="17">17</option>
+                                                <option value="18">18</option>
+                                                <option value="19">19</option>
+                                                <option value="20">20</option>
+                                            </select>
+                                        </span>
+                                        <span class="myLabel2">周到</span>
+                                        <span>
+                                            <select class="myLoginSelect" id="endWeek">
+                                                @*<option value="0" selected="selected">请选择</option>*@
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                                <option value="10">10</option>
+                                                <option value="11">11</option>
+                                                <option value="12">12</option>
+                                                <option value="13">13</option>
+                                                <option value="14">14</option>
+                                                <option value="15">15</option>
+                                                <option value="16">16</option>
+                                                <option value="17">17</option>
+                                                <option value="18" selected="selected">18</option>
+                                                <option value="19">19</option>
+                                                <option value="20">20</option>
+                                            </select>
+                                        </span>
+                                        <span class="myLabel2">周</span>
+
+                                        @*<span class="mylabel">上课时间：</span>*@
+                                        <span class="myLabel2"> ，星期</span>
+                                        <span>
+                                            <select class="myLoginSelect" id="classDay">
+                                                <option value="0" selected="selected">请选择</option>
+                                                <option value="1">一</option>
+                                                <option value="2">二</option>
+                                                <option value="3">三</option>
+                                                <option value="4">四</option>
+                                                <option value="5">五</option>
+                                                <option value="6">六</option>
+                                                <option value="7">日</option>
+                                            </select>
+                                        </span>
+                                        <span class="myLabel2">， 第</span>
+                                        <span>
+                                            <select class="myLoginSelect" id="beginClassNumber">
+                                                @*<option value="0" selected="selected">请选择</option>*@
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9" selected="selected">9</option>
+                                                <option value="10">10</option>
+                                            </select>
+                                        </span>
+                                        <span class="myLabel2">—</span>
+                                        <span>
+                                            <select class="myLoginSelect" id="endClassNumber">
+                                                @*<option value="0" selected="selected">请选择</option>*@
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                                <option value="9">9</option>
+                                                <option value="10" selected="selected">10</option>
+                                            </select>
+                                        </span>
+                                        <span class="myLabel2">节</span>
+
+                                        <span id="MsgFiveLine"></span>
+                                    </div>
+
+                                    <hr class="myhr" />
+
+                                    <div class="myinfo-second">
+                                        <span>
+                                            <span class="mylabel">选课开始时间：</span>
+                                        </span>
+                                        <span>
+                                            <input type="text" class="myInput2 myInput3" id="beginSelectYear" maxlength="4" />
+                                        </span>
+                                        <span class="myLabel2">年</span>
+                                        <span>
+                                            <input type="text" class="myInput2 myInput3" id="beginSelectMonth" maxlength="2" />
+                                        </span>
+                                        <span class="myLabel2">月</span>
+                                        <span>
+                                            <input type="text" class="myInput2 myInput3" id="beginSelectDay" maxlength="2" />
+                                        </span>
+                                        <span class="myLabel2">日</span>
+                                        &nbsp;&nbsp;
+                                        <span>
+                                            <input type="text" class="myInput2 myInput3" id="beginSelectHour" maxlength="2" />
+                                        </span>
+                                        <span class="myLabel2">时</span>
+                                        <span>
+                                            <input type="text" class="myInput2 myInput3" id="beginSelectMinute" maxlength="2" />
+                                        </span>
+                                        <span class="myLabel2">分</span>
+                                        @*<span>
+                    <input type="text" class="myInput2 myInput3" id="beginSelectSecond" maxlength="2" />
+                </span>*@
+                                        @*<span class="myLabel2">秒</span>*@
+
+                                        <span id="MsgSixLine"></span>
+
+                                    </div>
+
+                                    @*<hr class="myhr" />*@
+                                    <div class="mySelectClassDays">
+                                        <span class="mylabel">总的选课天数：</span>
+                                        <span> <input type="text" class="myInput2 myInput3" maxlength="2" id="SelectClassDays" placeholder="1~10" /> </span>
+                                        <span class="myLabel2">天 （选填）</span>
+                                        <span id="MsgSelectClassDays"></span>
+                                        <span id="MsgSevenLine"></span>
+                                    </div>
+
+                                    <div class="myinfo-second">
+                                        <span>
+                                            <span class="mylabel">选课结束时间：</span>
+                                        </span>
+                                        <span>
+                                            <input type="text" class="myInput2 myInput3" id="endSelectYear" maxlength="4" />
+                                        </span>
+                                        <span class="myLabel2">年</span>
+                                        <span>
+                                            <input type="text" class="myInput2 myInput3" id="endSelectMonth" maxlength="2" />
+                                        </span>
+                                        <span class="myLabel2">月</span>
+                                        <span>
+                                            <input type="text" class="myInput2 myInput3" id="endSelectDay" maxlength="2" />
+                                        </span>
+                                        <span class="myLabel2">日</span>
+                                        &nbsp;&nbsp;
+                                        <span>
+                                            <input type="text" class="myInput2 myInput3" id="endSelectHour" maxlength="2" />
+                                        </span>
+                                        <span class="myLabel2">时</span>
+                                        <span>
+                                            <input type="text" class="myInput2 myInput3" id="endSelectMinute" maxlength="2" />
+                                        </span>
+                                        <span class="myLabel2">分</span>
+                                        @*<span>
+                    <input type="text" class="myInput2 myInput3" id="endSelectSecond" maxlength="2"/>
+                </span>
+                <span class="myLabel2">秒</span>*@
+
+                                        <span id="MsgEightLine"></span>
+                                    </div>
+                                    <hr class="myhr" />
+
+                                    <div class="myinfo-second">
+                                        <span class="mylabel" style="margin-left:10%; float:left;">备注：</span>
+                                        <textarea class="mytextarea" maxlength="250" id="txtRemark"></textarea>
+
+                                    </div>
+
+                                    <hr class="myhr" />
+
+                                    <div class="myinfo-second" style="margin-right:5%;background-color:yellow;">
+                                        @*<span class="myinfo_topbtn"><input type="button" class="myEditBtn" value="修改全部" id="allBtn2" /></span>*@
+                                        <span style="float:right; margin-right:6%;margin-bottom:2%;">
+                                            <input type="button" class="myCourseSubBtn1" value="返回" id="courseInfoBackBtn" />
+                                            <input type="button" class="myCourseSubBtn1" value="保存" id="courseInfoSaveBtn" />
+                                            <input type="button" class="myCourseSubBtn1" value="取消" id="courseInfoCancelBtn" />
+                                        </span>
+                                    </div>
+
+                                    <hr class="myhr" />
+
+                                    <div class="myinfo-second">
+                                        <span id="totalMsg" style="margin-bottom:2%;margin-right:10%;"></span>
+
+                                    </div>
+
+                                    <hr class="myhr" />
+
+                                </div>
+
+                                <!--------------教师个人信息框结束----------------------->
+
+                            </div>
+                            
+                        </div>
+
+                            <!--------------教师个人信息框结束----------------------->
+
+                        </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!--------------------------主内容结束-------------------------------------------------------->
+
+    <hr />
+
+    <!-----------------------系统帮助和说明模板框（开始）---------------------------------------->
+    <div id="Timer">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary btn-lg myHide" data-toggle="modal" data-target="#myModal">
+            Launch demo modal
+        </button>
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">系统帮助和说明</h4>
+                    </div>
+                    <div class="modal-body">
+                        ...
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-----------------------系统帮助和说明模板框（结束）---------------------------------------->
+
+    <div class="footerLink"><p>友情链接：<a href="http://glyphicons.com/"> Glyphicons </a> | <a href="javascript:void(0);" onclick="myHelpLink()"> <span class="glyphicon glyphicon-question-sign " aria-hidden="true"></span> 系统帮助和说明</a> </p></div>
+
+
+    <script src="~/MyContent/javascript/bootstrap.min.js"></script>
+    <script src="~/MyContent/javascript/myInfoJS.js"></script>
+    <script src="~/MyContent/javascript/jquery-ui-1.8.24.min.js"></script>
+    <script src="~/MyContent/javascript/teacherJS.js"></script>
+
+
+</body>
+</html>
+

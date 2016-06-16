@@ -1,0 +1,174 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="~/MyContent/images/LOGO2.jpg" rel="shortcut icon" />
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>后台管理</title>
+
+    <link href="~/MyContent/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/MyContent/css/UserInfoCss.css" rel="stylesheet" />
+    @*<link href="~/MyContent/css/myInfo.css" rel="stylesheet" />*@
+    <link href="~/MyContent/css/adminCSS.css" rel="stylesheet" />
+</head>
+<body>
+   
+    <div class="headerLogo">
+        
+        @*<img class="Logo" src="~/MyContent/images/logo-title.png" />*@
+        @*<img class="Logo" src="~/MyContent/images/Login_BG.jpg" />*@
+        @*<img class="Logo" src="~/MyContent/images/header2.jpg" />*@
+        @*<img class="Logo"  src="~/MyContent/images/header3.jpg" />*@
+        <img class="Logo" src="~/MyContent/images/header6.jpg" />
+    </div>
+    <div class="headerLabel">
+        <span><span class="glyphicon glyphicon-user " aria-hidden="true"></span></span> <span class="myHeaderSpanLabel">【@ViewBag.Admin.AdminName】</span> <span class="myHeaderSpanLabel">，您好！</span> <span><span class="myHeaderSpanLabel">管理级别：</span><span class="myHeaderSpanLabel2">【@ViewBag.Admin.Level】</span></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span> <span class="myHeaderSpanLabel">编号：</span> <span class="myHeaderSpanLabel2">【@ViewBag.Admin.AdminNum】</span> </span>
+    </div>
+    <!--------------------------------导航条开始----------------------------------------------------->
+
+    <nav class="navbar navbar-default navbar-inverse mynav">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @*<a class="navbar-brand" href="#">Brand</a>*@
+
+                <img class="navbar-brand" src="~/MyContent/images/LOGO2.png" />
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav" id="mynavUl">
+                    <li class="active" id="mynavL1"><a href="javascript:void(0);">个人信息 <span class="sr-only">(current)</span></a></li>
+                    <li id="mynavL2">@Html.ActionLink("用户管理", "UserManager", "Admin")</li>
+                    <li id="munavL3">@Html.ActionLink("课程管理", "", "Admin") </li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/Home/Exist"><span class="glyphicon glyphicon-log-in mySuccess" aria-hidden="true"></span>&nbsp; 重新登录</a></li>
+                    <li><a href="/Home/Exist"><span class="glyphicon glyphicon-log-out myError" aria-hidden="true"></span>&nbsp; 退出</a></li>
+
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+    <!--------------------------------导航条结束----------------------------------------------------->
+    <!--------------------------主内容开始-------------------------------------------------------->
+    <div class="main_content UerInfo_main" id="admin_main_content">
+        <div class="main_content_left">
+            <div class="main_content_left_0"> <span class="glyphicon glyphicon-wrench myNewSpanColor" aria-hidden="true"></span>&nbsp; 相关操作 </div>
+
+            <div class="main_content_left_content">
+                <div class="main_content_left_1" id="mynavLeft1"> &nbsp; <span class="glyphicon glyphicon-search myNewSpanColor" aria-hidden="true"></span>&nbsp;@Html.ActionLink("我的基本信息查询", "Index", "Admin") </div>
+                <div class="main_content_left_1" id="mynavLeft2"> &nbsp; <span class="glyphicon glyphicon-edit myNewSpanColor" aria-hidden="true"></span>&nbsp; <a href="javascript:void(0);" onclick="UpdatePwd()">修改密码</a> </div>
+            </div>
+        </div>
+        <!---------------------------左右两边分割线-------------------------------------------->
+        <div class="main_content_right">
+            <div>
+                <div class="main_content_right_0">&nbsp;&nbsp;&nbsp;&nbsp;当前位置：管理员 -----> 管理员信息查询 </div>
+            </div>
+
+            <div class="main_content_right_content">
+                <div class="main_content_right_content_title">管理员的基本信息查询</div>
+
+                <div class="main_content_right_content_1">
+                    <div class="mydiv2 TeacherUserInfo" id="mydiv1">
+
+                        <!--------------管理员个人信息框开始----------------------->
+
+             @*<div id="t2">
+                 <fieldset>
+                     <legend>选项</legend>
+                     <input type="checkbox" name="1" />
+                     <input type="checkbox" name="2" />
+                     <input type="checkbox" name="3" />
+                     <input type="checkbox" name="4" />
+                     <input type="checkbox" name="5" />
+                     <input type="checkbox" name="6" />
+                 </fieldset>
+                 <input type="button" value="全选" onclick="btnSelectAll()"/>
+             </div>*@
+
+                        <table id="StuInfoTable">
+                            <tr class="mytr2 mytr2-1 "><th>登录帐号：</th><td>&nbsp; @ViewBag.Admin.AdminNum</td><th>姓名：</th><td>&nbsp; @ViewBag.Admin.AdminName</td></tr>
+                            <tr class="mytr2-1 ">
+                                <th>管理级别：</th>
+                                <td>&nbsp; @ViewBag.Admin.Level</td>
+                                <th>状态：</th>
+                                <td>&nbsp; @ViewBag.Admin.State</td>
+                            </tr>
+                            <tr class="mytr2 mytr2-1 "><th>注册时间：</th><td>&nbsp; @ViewBag.Admin.SubDate</td><th>性别：</th><td>&nbsp; @ViewBag.Admin.Sex</td></tr>
+                            <tr class="mytr2-1 "><th>联系电话：</th><td>&nbsp; @ViewBag.Admin.Phone</td><th>邮箱：</th><td>&nbsp; @ViewBag.Admin.Email</td></tr>
+                            @*<tr class="mytr2 mytr2-1 "><th>年级：</th><td></td><th>邮箱：</th><td>&nbsp; ViewBag.Stu.Email</td></tr>*@
+                            <tr class="mytr3"><td colspan="6"><a href="javascript:void(0);" onclick="AdminInfoEditClick()">【编辑】</a> <a href="javascript:if(confirm('你确定要下载个人信息表么？')){window.location.href=' /Admin/DownLoadSelfInfon';}" id="btnDownLoadClick" data-toggle="tooltip" data-placement="right" title="<h5> <span class='myTipTitleColor'>下载个人信息生成 Excel 表格</span></h5>">【下载】</a> </td></tr>
+                        </table>
+                        <hr />
+                        <table class="myHide" id="StuEditTable">
+                            <tr class="mytr3"><td colspan="2">【<text class="mythead"> 当前权限所具有的操作</text>】</tr>
+                            <tr class="mytr2"><th>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;联系电话：</th><td><input type="text" value="@ViewBag.Admin.Phone" id="editPhone" data-toggle="tooltip" data-placement="right" title="<h5> <span class='myTipTitleColor'>请填写11位有效电话号码！</span></h5>" /></td></tr>
+                            <tr class="mytr2"><th>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;邮&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;箱：</th><td><input type="text" value="@ViewBag.Admin.Email" id="editEmail" data-toggle="tooltip" data-placement="right" title="<h5> <span class='myTipTitleColor'>例：someone@example.com</span></h5>" /></tr>
+                            <tr class="mytr3"><td colspan="2"><a href="javascript:void(0);" onclick="AdminSaveClick()">【保存】</a> | <a href="javascript:void(0);" onclick="AdminInfoEditClick() ">【取消】</a></td></tr>
+                            <tr class="mytr3"><td colspan="2" id="stuSaveMsg"></td></tr>
+                        </table>
+
+                        <!--------------管理员个人信息框结束----------------------->
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!--------------------------主内容结束-------------------------------------------------------->
+
+    <hr />
+
+    <!-----------------------系统帮助和说明模板框（开始）---------------------------------------->
+    <div id="Timer">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary btn-lg myHide" data-toggle="modal" data-target="#myModal">
+            Launch demo modal
+        </button>
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">系统帮助和说明</h4>
+                    </div>
+                    <div class="modal-body">
+                        ...
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-----------------------系统帮助和说明模板框（结束）---------------------------------------->
+
+    <div class="footerLink"><p>友情链接：<a href="http://glyphicons.com/"> Glyphicons </a> | <a href="javascript:void(0);" onclick="myHelpLink()"> <span class="glyphicon glyphicon-question-sign " aria-hidden="true"></span> 系统帮助和说明</a> </p></div>
+    <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+    <script src="~/MyContent/javascript/jquery-2.1.4.min.js"></script>
+    <script src="~/MyContent/javascript/bootstrap.min.js"></script>
+    @*<script src="~/MyContent/javascript/teacherJS.js"></script>
+    <script src="~/MyContent/javascript/myInfoJS.js"></script>*@
+    <script src="~/MyContent/javascript/admin.js"></script>
+</body>
+</html>
